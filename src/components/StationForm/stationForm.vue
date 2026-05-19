@@ -23,7 +23,7 @@
                 </el-form-item>
             </el-col>
             <el-col :span="12">
-                <el-form-item label="快充数：" prop="fast">
+                <el-form-item label="快充：" prop="fast">
                     <el-input v-model="ruleForm.fast"/>
                 </el-form-item>
                 <el-form-item label="慢充数：" prop="slow">
