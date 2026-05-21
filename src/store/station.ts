@@ -17,6 +17,7 @@ export const useStationStore=defineStore("station",()=>{
     const setRowData=(row:RowType)=>{
         rowData.value=row
     }
+    
     return {
         rowData,setRowData
     }

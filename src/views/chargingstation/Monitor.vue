@@ -44,7 +44,7 @@
             </el-row>
         </el-card>
         <el-card class="mt">
-            <el-button type="primary" icon="plus" @click="dialogVisible=true">新增充电站</el-button>
+            <el-button type="primary" icon="plus" @click="handleAdd">新增充电站</el-button>
         </el-card>
         <el-card class="mt">
             <el-table :data="tableData" style="width: 100%" v-loading="loading">
@@ -68,33 +68,31 @@
                 <el-table-column prop="operation" label="操作" width="180">
                     <template #default="scope">
                         <div style="display: flex; gap: 8px">
-                            <el-button type="primary" size="small" @click="handleEdit(scope.row )">编辑</el-button>
-                            <el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>
+                            <el-button type="primary" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+                            <el-popconfirm title="确定要删除这个站点吗？" @confirm="handleDelete(scope.row)"
+                                confirm-button-text="确定" cancel-button-text="取消">
+                                <template #reference>
+                                    <el-button type="danger" size="small">删除</el-button>
+                                </template>
+                            </el-popconfirm>
                         </div>
                     </template>
                 </el-table-column>
             </el-table>
-            <el-pagination 
-            v-model:current-page="pageinfo.page" 
-            v-model:page-size="pageinfo.pageSize"
-            :page-sizes="[10, 20, 30, 40]" 
-            layout="total, sizes, prev, pager, next, jumper" 
-            :total="totals"
-            @size-change="handleSizeChange" 
-            @current-change="handleCurrentChange" 
-            class="fr mt " type="primary" 
-            background
-            />
+            <el-pagination :current-page="pageinfo.page" :page-size="pageinfo.pageSize" :page-sizes="[10, 20, 30, 40]"
+                layout="total, sizes, prev, pager, next, jumper" :total="totals" @size-change="handleSizeChange"
+                @current-change="handleCurrentChange" class="fr mt" type="primary" background />
         </el-card>
-        <station-form :dialog-visible="dialogVisible" @close="dialogVisible=false" @confirm="dialogVisible=false"></station-form>
+        <station-form :dialog-visible="dialogVisible" @close="dialogVisible = false" @confirm="loadData"></station-form>
     </div>
 </template>
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { listApi } from "@/api/chargingstation";
-import StationForm from "@/components/StationForm/stationForm.vue"
-import type{RowType} from "@/types/station"
-import {useStationStore}  from "@/store/station"
+import { listApi, deleteApi } from "@/api/chargingstation";
+import { ElMessage } from "element-plus";
+import StationForm from "@/components/StationForm/stationForm.vue";
+import type { RowType } from "@/types/station";
+import { useStationStore } from "@/store/station";
 const select = ref("name");
 const fromParams = reactive({
     input: "",
@@ -106,15 +104,18 @@ const pageinfo = reactive({
 });
 const totals = ref(0);
 const tableData = ref([]);
-const loading = ref<boolean>(false)
-const dialogVisible = ref<boolean>(false)
-const stationStore=useStationStore()
-const {setRowData}=stationStore
+const loading = ref<boolean>(false);
+const dialogVisible = ref<boolean>(false);
+const stationStore = useStationStore();
+const { setRowData } = stationStore;
 const loadData = async () => {
     loading.value = true;
-    const {data: { total, list },} = await listApi({ ...pageinfo, 
+    const {
+        data: { total, list },
+    } = await listApi({
+        ...pageinfo,
         status: fromParams.value,
-        [select.value]:fromParams.input 
+        [select.value]: fromParams.input,
     });
     loading.value = false;
     tableData.value = list;
@@ -135,14 +136,41 @@ const handleReset = () => {
     loadData();
 };
 const handleEdit = (row: RowType) => {
-    setRowData(row)
+    setRowData(row);
     dialogVisible.value = true;
 };
-const handleDelete = (row: RowType) => {
-    console.log("删除:", row);
-    // 这里可以添加删除逻辑
+const handleDelete = async (row: RowType) => {
+    try {
+        const res = await deleteApi(row);
+        if (res.code === 200) {
+            ElMessage({
+                message: res.data,
+                type: "success",
+            });
+            loadData();
+        }
+    } catch (error) {
+        ElMessage({
+            message: "删除失败",
+            type: "error",
+        });
+    }
 };
-
+const handleAdd = () => {
+    setRowData({
+        name: "",
+        id: "",
+        city: "",
+        fast: "",
+        slow: "",
+        status: 1,
+        now: "",
+        fault: "",
+        person: "",
+        tel: "",
+    });
+    dialogVisible.value = true;
+};
 onMounted(() => {
     loadData();
 });

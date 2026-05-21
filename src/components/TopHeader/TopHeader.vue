@@ -6,10 +6,10 @@
                     <Bell />
                 </el-icon>
             </el-badge>
-            <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="ml mr"/>
+            <el-avatar :src="top" class="ml mr"/>
             <el-dropdown @command="handleCommand">
                 <span class="el-dropdown-link">
-                    欢迎你，{{ username }}
+                    欢迎回来{{ username }}
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
@@ -30,6 +30,7 @@ import { ref } from "vue"
 import { useUserStore } from "@/store/auth";
 import { storeToRefs } from "pinia";
 import {useRouter} from "vue-router"
+import top from "@/img/aa.jpg"
 const router=useRouter()
 const userStore=useUserStore();
 const {username}=storeToRefs(userStore) 

@@ -167,20 +167,20 @@ Mock.mock("https://www.demo.com/login","post",(options:any)=>{
             data:{
                 token:"admintokenkkljbuo2w9xla2",
                 user:{
-                    username:"赖军",
+                    username:"晴晴",
                     roles:["admin"],
                 },
                 menulist
             }
         }
-    }else if(username==="user"&&password==="user666"){
+    }else if(username==="user"&&password==="123456"){
         return {
             code:200,
             message:"登陆成功",
             data:{
                 token:"usertokenkkljbuo2w9xla2",
                 user:{
-                    username:"江霞",
+                    username:"面包",
                     roles:["user"]
                 },
                 menulist:menulist2
