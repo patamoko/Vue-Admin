@@ -92,14 +92,16 @@
         <el-card class="mt">
             <el-table :data="list" style="width: 100%" v-loading="loading">
                 <el-table-column type="index" label="序号" width="80" />
-                <el-table-column prop="name" label="充电站名称" />
-                <el-table-column prop="id" label="充电站ID" />
-                <el-table-column prop="city" label="所属城市" />
-                <el-table-column prop="total" label="充电桩总量" />
-                <el-table-column prop="revenue" label="单日总收入">
-                <el-table-column prop="monthRevenue" label="月度总收入" />
-                <el-table-column prop="yearRevenue" label="年度总收入" />
-                </el-table-column>
+                <el-table-column  label="充电站名称" />
+                <el-table-column  label="充电站ID" />
+                <el-table-column  label="所属城市" />
+                <el-table-column  label="充电桩总量" />
+                <el-table-column  label="单日总收入"/>
+                <el-table-column  label="月度总收入" />
+                <el-table-column  label="电费营收" />
+                <el-table-column  label="停车费营收" />
+                <el-table-column  label="服务费营收" />
+                <el-table-column  label="会员卡储值金额" />
             </el-table>
         </el-card>
     </div>
