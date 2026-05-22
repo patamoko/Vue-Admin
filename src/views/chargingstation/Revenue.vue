@@ -99,8 +99,8 @@
                 <el-table-column label="单日总收入"  />
                 <el-table-column label="月度总收入" prop="month">
                     <template #default="scope">
-                        <span>{{ scope.row.monthIncome }}</span>
-                        <span>万元</span>
+                        <span>{{ scope.row.month }}</span>
+                        <el-tag :type="scope.row.mpercent > 0 ? 'success' : 'danger'"></el-tag>
                     </template>
                 </el-table-column>
                 <el-table-column label="电费营收" prop="electricity" />
