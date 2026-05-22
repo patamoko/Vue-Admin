@@ -96,7 +96,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
 import { TrendCharts } from "@element-plus/icons-vue";
 import { revenueChartApi } from "@/api/chargingstation";
-
+import { RevenueListType } from "@/api/chargingstation";
 let chartInstance: echarts.ECharts | null = null;
 
 onMounted(() => {
@@ -241,7 +241,14 @@ const handleResize = () => {
         chartInstance.resize();
     }
 };
-const loadDa
+const loadData = async () => {
+    const res = await revenueListApi({
+        page: 1,
+        pageSize: 10,
+        name: "2023-05-01",
+    });
+    console.log(res);
+};
 </script>
 <style lang="less" scoped>
 .revenue-page {
