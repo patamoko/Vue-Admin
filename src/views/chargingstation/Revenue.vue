@@ -1,95 +1,95 @@
 <template>
-  <div class="revenue-page">
-    <el-row :gutter="20" class="mb-20">
-      <el-col :span="4">
-        <div class="stat-card">
-          <div class="stat-title">今日总收入(元)</div>
-          <div class="stat-number">12,239,824</div>
-          <div class="stat-change positive">
-            <el-icon>
-              <TrendCharts />
-            </el-icon>
-            21%
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="stat-card">
-          <div class="stat-title">本月总收入(万元)</div>
-          <div class="stat-number">2,924</div>
-          <div class="stat-change positive">
-            <el-icon>
-              <TrendCharts />
-            </el-icon>
-            21%
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="stat-card">
-          <div class="stat-title">会员卡储值金额(元)</div>
-          <div class="stat-number">239,824</div>
-          <div class="stat-change positive">
-            <el-icon>
-              <TrendCharts />
-            </el-icon>
-            21%
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="stat-card">
-          <div class="stat-title">服务费总金额(元)</div>
-          <div class="stat-number">16,824</div>
-          <div class="stat-change negative">
-            <el-icon>
-              <TrendCharts />
-            </el-icon>
-            4%
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="stat-card">
-          <div class="stat-title">停车费总金额(元)</div>
-          <div class="stat-number">9,687</div>
-          <div class="stat-change negative">
-            <el-icon>
-              <TrendCharts />
-            </el-icon>
-            4%
-          </div>
-        </div>
-      </el-col>
-      <el-col :span="4">
-        <div class="stat-card">
-          <div class="stat-title">电度总金额(元)</div>
-          <div class="stat-number">223,674</div>
-          <div class="stat-change positive">
-            <el-icon>
-              <TrendCharts />
-            </el-icon>
-            21%
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+    <div class="revenue-page">
+        <el-row :gutter="20" class="mb-20">
+            <el-col :span="4">
+                <div class="stat-card">
+                    <div class="stat-title">今日总收入(元)</div>
+                    <div class="stat-number">12,239,824</div>
+                    <div class="stat-change positive">
+                        <el-icon>
+                            <TrendCharts />
+                        </el-icon>
+                        21%
+                    </div>
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="stat-card">
+                    <div class="stat-title">本月总收入(万元)</div>
+                    <div class="stat-number">2,924</div>
+                    <div class="stat-change positive">
+                        <el-icon>
+                            <TrendCharts />
+                        </el-icon>
+                        21%
+                    </div>
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="stat-card">
+                    <div class="stat-title">会员卡储值金额(元)</div>
+                    <div class="stat-number">239,824</div>
+                    <div class="stat-change positive">
+                        <el-icon>
+                            <TrendCharts />
+                        </el-icon>
+                        21%
+                    </div>
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="stat-card">
+                    <div class="stat-title">服务费总金额(元)</div>
+                    <div class="stat-number">16,824</div>
+                    <div class="stat-change negative">
+                        <el-icon>
+                            <TrendCharts />
+                        </el-icon>
+                        4%
+                    </div>
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="stat-card">
+                    <div class="stat-title">停车费总金额(元)</div>
+                    <div class="stat-number">9,687</div>
+                    <div class="stat-change negative">
+                        <el-icon>
+                            <TrendCharts />
+                        </el-icon>
+                        4%
+                    </div>
+                </div>
+            </el-col>
+            <el-col :span="4">
+                <div class="stat-card">
+                    <div class="stat-title">电度总金额(元)</div>
+                    <div class="stat-number">223,674</div>
+                    <div class="stat-change positive">
+                        <el-icon>
+                            <TrendCharts />
+                        </el-icon>
+                        21%
+                    </div>
+                </div>
+            </el-col>
+        </el-row>
 
-    <el-row>
-      <el-col :span="24">
-        <el-card>
-          <template #header>
-            <div class="card-header">
-              <span>营收趋势分析</span>
-            </div>
-          </template>
-          <div class="chart-container">
-            <div id="revenueChart" style="width: 100%; height: 220px"></div>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-  </div>
+        <el-row>
+            <el-col :span="24">
+                <el-card>
+                    <template #header>
+                        <div class="card-header">
+                            <span>营收趋势分析</span>
+                        </div>
+                    </template>
+                    <div class="chart-container">
+                        <div id="revenueChart" style="width: 100%; height: 220px"></div>
+                    </div>
+                </el-card>
+            </el-col>
+        </el-row>
+    </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
@@ -99,224 +99,227 @@ import { revenueChartApi, revenueListApi } from "@/api/chargingstation";
 let chartInstance: echarts.ECharts | null = null;
 
 onMounted(() => {
-  initChart();
-  window.addEventListener("resize", handleResize);
+    initChart();
+    window.addEventListener("resize", handleResize);
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", handleResize);
-  if (chartInstance) {
-    chartInstance.dispose();
-  }
+    window.removeEventListener("resize", handleResize);
+    if (chartInstance) {
+        chartInstance.dispose();
+    }
 });
 const initChart = () => {
-  const chartDom = document.getElementById("revenueChart");
-  if (!chartDom) return;
+    const chartDom = document.getElementById("revenueChart");
+    if (!chartDom) return;
 
-  chartInstance = echarts.init(chartDom);
+    chartInstance = echarts.init(chartDom);
 
-  const option = {
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "cross",
-      },
-      formatter: (params: any) => {
-        let result = params[0].axisValue + "<br/>";
-        params.forEach((item: any) => {
-          result += `${item.marker}${item.seriesName}: ${item.value}<br/>`;
-        });
-        return result;
-      },
-    },
-    legend: {
-      data: ["金额", "订单量"],
-      top: 0,
-      right: 0,
-      textStyle: {
-        fontSize: 11,
-      },
-    },
-    grid: {
-      left: "1%",
-      right: "1%",
-      bottom: "5%",
-      top: "8%",
-      containLabel: true,
-    },
-    xAxis: [
-      {
-        type: "category",
-        data: ["一月", "二月", "三月", "四月", "五月", "六月", "七月"],
-        axisLine: {
-          lineStyle: {
-            color: "#ccc",
-          },
+    const option = {
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "cross",
+            },
+            formatter: (params: any) => {
+                let result = params[0].axisValue + "<br/>";
+                params.forEach((item: any) => {
+                    result += `${item.marker}${item.seriesName}: ${item.value}<br/>`;
+                });
+                return result;
+            },
         },
-        axisLabel: {
-          fontSize: 10,
+        legend: {
+            data: ["金额", "订单量"],
+            top: 0,
+            right: 0,
+            textStyle: {
+                fontSize: 11,
+            },
         },
-      },
-    ],
-    yAxis: [
-      {
-        type: "value",
-        name: "金额(万元)",
-        nameTextStyle: {
-          fontSize: 11,
+        grid: {
+            left: "1%",
+            right: "1%",
+            bottom: "5%",
+            top: "8%",
+            containLabel: true,
         },
-        position: "left",
-        axisLine: {
-          lineStyle: {
-            color: "#5470c6",
-          },
-        },
-        axisLabel: {
-          formatter: "{value}",
-          fontSize: 10,
-        },
-        splitLine: {
-          lineStyle: {
-            color: "#f0f0f0",
-          },
-        },
-      },
-      {
-        type: "value",
-        name: "订单量",
-        nameTextStyle: {
-          fontSize: 11,
-        },
-        position: "right",
-        axisLine: {
-          lineStyle: {
-            color: "#91cc75",
-          },
-        },
-        axisLabel: {
-          formatter: "{value}",
-          fontSize: 10,
-        },
-        splitLine: {
-          show: false,
-        },
-      },
-    ],
-    series: [
-      {
-        name: "订单量",
-        type: "line",
-        yAxisIndex: 1,
-        data: [120, 90, 150, 180, 200, 130, 170],
-        smooth: true,
-        symbol: "circle",
-        symbolSize: 6,
-        itemStyle: {
-          color: "#5470c6",
-        },
-        lineStyle: {
-          width: 2,
-          color: "#5470c6",
-        },
-      },
-      {
-        name: "金额",
-        type: "bar",
-        yAxisIndex: 0,
-        data: [80, 60, 120, 150, 180, 100, 160],
-        itemStyle: {
-          color: "#5470c6",
-          borderRadius: [4, 4, 0, 0],
-        },
-      },
-    ],
-  };
+        xAxis: [
+            {
+                type: "category",
+                data: ["一月", "二月", "三月", "四月", "五月", "六月", "七月"],
+                axisLine: {
+                    lineStyle: {
+                        color: "#ccc",
+                    },
+                },
+                axisLabel: {
+                    fontSize: 10,
+                },
+            },
+        ],
+        yAxis: [
+            {
+                type: "value",
+                name: "金额(万元)",
+                nameTextStyle: {
+                    fontSize: 11,
+                },
+                position: "left",
+                axisLine: {
+                    lineStyle: {
+                        color: "#5470c6",
+                    },
+                },
+                axisLabel: {
+                    formatter: "{value}",
+                    fontSize: 10,
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: "#f0f0f0",
+                    },
+                },
+            },
+            {
+                type: "value",
+                name: "订单量",
+                nameTextStyle: {
+                    fontSize: 11,
+                },
+                position: "right",
+                axisLine: {
+                    lineStyle: {
+                        color: "#91cc75",
+                    },
+                },
+                axisLabel: {
+                    formatter: "{value}",
+                    fontSize: 10,
+                },
+                splitLine: {
+                    show: false,
+                },
+            },
+        ],
+        series: [
+            {
+                name: "订单量",
+                type: "line",
+                yAxisIndex: 1,
+                data: [120, 90, 150, 180, 200, 130, 170],
+                smooth: true,
+                symbol: "circle",
+                symbolSize: 6,
+                itemStyle: {
+                    color: "#5470c6",
+                },
+                lineStyle: {
+                    width: 2,
+                    color: "#5470c6",
+                },
+            },
+            {
+                name: "金额",
+                type: "bar",
+                yAxisIndex: 0,
+                data: [80, 60, 120, 150, 180, 100, 160],
+                itemStyle: {
+                    color: "#5470c6",
+                    borderRadius: [4, 4, 0, 0],
+                },
+            },
+        ],
+    };
 
-  chartInstance.setOption(option);
+    chartInstance.setOption(option);
 };
 const handleResize = () => {
-  if (chartInstance) {
-    chartInstance.resize();
-  }
+    if (chartInstance) {
+        chartInstance.resize();
+    }
 };
 const loadData = async () => {
-  try {
-    // 获取营收列表数据
-    const listData = await revenueListApi({
-      page: 1,
-      pageSize: 10,
-      name: "",
-    });
-    console.log("营收列表数据:", listData);
-  } catch (error) {
-    console.error("加载数据失败:", error);
-  }
+    try {
+        // 获取营收列表数据
+        const {data:{total,list}} = await revenueListApi({
+            page: 1,
+            pageSize: 10,
+            name: "",
+        });
+        console.log("营收列表数据:", total,list);
+    } catch (error) {
+        console.error("加载数据失败:", error);
+    }
 };
+onMounted(() => {
+    loadData();
+});
 </script>
 <style lang="less" scoped>
 .revenue-page {
-  padding: 20px;
+    padding: 20px;
 }
 
 .mb-20 {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .stat-card {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  color: #333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e8e8e8;
-  transition: transform 0.3s ease;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8e8e8;
+    transition: transform 0.3s ease;
 
-  &:hover {
-    transform: translateY(-2px);
-  }
+    &:hover {
+        transform: translateY(-2px);
+    }
 }
 
 .stat-title {
-  font-size: 12px;
-  color: #999;
-  margin-bottom: 10px;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
 }
 
 .stat-number {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
 }
 
 .stat-change {
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 
-  &.positive {
-    color: #67c23a;
-    background-color: rgba(103, 194, 58, 0.1);
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
+    &.positive {
+        color: #67c23a;
+        background-color: rgba(103, 194, 58, 0.1);
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
 
-  &.negative {
-    color: #f56c6c;
-    background-color: rgba(245, 108, 108, 0.1);
-    padding: 2px 8px;
-    border-radius: 4px;
-  }
+    &.negative {
+        color: #f56c6c;
+        background-color: rgba(245, 108, 108, 0.1);
+        padding: 2px 8px;
+        border-radius: 4px;
+    }
 }
 
 .card-header {
-  font-size: 16px;
-  font-weight: 600;
-  color: #303133;
+    font-size: 16px;
+    font-weight: 600;
+    color: #303133;
 }
 
 .chart-container {
-  padding: 5px 0;
+    padding: 5px 0;
 }
 </style>
