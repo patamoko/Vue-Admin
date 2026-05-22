@@ -8,11 +8,17 @@ interface ListType{
     id?:string,
     status?:number
 }
+interface RevenueListType{
+    page:number,
+    pageSize:number,
+    name:string,
+}
 enum Api{
     List="/stationList",
     Edit="/station/edit",
     Delete="/station/delete",
-    revenueChart="/revenueChart"
+    revenueChart="/revenueChart",
+    revenueList="/revenueList"
 }
 
 function listApi(data:ListType){
@@ -27,7 +33,7 @@ function deleteApi(data:RowType){
 function revenueChartApi(data:RowType){
     return get(Api.revenueChart,data)
 }
-function revenueListApi(data:RowType){
-    return get(Api.revenueList,data)
+function revenueListApi(data:RevenueListType){
+    return post(Api.revenueList,data)
 }
 export {listApi,editApi,deleteApi,revenueChartApi,revenueListApi}

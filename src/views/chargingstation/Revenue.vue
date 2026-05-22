@@ -95,7 +95,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
 import { TrendCharts } from "@element-plus/icons-vue";
-import { reactive } from "vue";
+import { revenueChartApi } from "@/api/chargingstation";
 
 let chartInstance: echarts.ECharts | null = null;
 
@@ -110,7 +110,6 @@ onUnmounted(() => {
         chartInstance.dispose();
     }
 });
-
 const initChart = () => {
     const chartDom = document.getElementById("revenueChart");
     if (!chartDom) return;
@@ -242,6 +241,7 @@ const handleResize = () => {
         chartInstance.resize();
     }
 };
+const loadDa
 </script>
 <style lang="less" scoped>
 .revenue-page {
