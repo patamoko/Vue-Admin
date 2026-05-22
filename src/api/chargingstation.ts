@@ -27,5 +27,7 @@ function deleteApi(data:RowType){
 function revenueChartApi(data:RowType){
     return get(Api.revenueChart,data)
 }
-
-export {listApi,editApi,deleteApi,revenueChartApi}
+function revenueListApi(data:RowType){
+    return get(Api.revenueList,data)
+}
+export {listApi,editApi,deleteApi,revenueChartApi,revenueListApi}
