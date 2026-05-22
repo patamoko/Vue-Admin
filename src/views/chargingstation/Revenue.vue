@@ -95,6 +95,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
 import { TrendCharts } from "@element-plus/icons-vue";
+import { reactive } from "vue";
 
 let chartInstance: echarts.ECharts | null = null;
 
