@@ -92,17 +92,13 @@
         <el-card class="mt">
             <el-table :data="list" style="width: 100%" v-loading="loading">
                 <el-table-column type="index" label="序号" width="80" />
-                <el-table-column prop="name" label="chong dian zhan名称" width="180" />
+                <el-table-column prop="name" label="充电站名称" />
+                <el-table-column prop="id" label="充电站ID" />
                 <el-table-column prop="city" label="所属城市" />
-                <el-table-column prop="fast" label="快充数" />
-                <el-table-column prop="slow" label="慢充数" />
-                <el-table-column prop="status" label="充电站状态">
-                    <template #default="scope">
-                        <el-tag type="primary" v-if="scope.row.status == 2">使用中</el-tag>
-                        <el-tag type="success" v-else-if="scope.row.status == 3">空闲中</el-tag>
-                        <el-tag type="warning" v-else-if="scope.row.status == 4">维护中</el-tag>
-                        <el-tag type="danger" v-else-if="scope.row.status == 5">待维修</el-tag>
-                    </template>
+                <el-table-column prop="total" label="充电桩总量" />
+                <el-table-column prop="revenue" label="单日总收入">
+                <el-table-column prop="monthRevenue" label="月度总收入" />
+                <el-table-column prop="yearRevenue" label="年度总收入" />
                 </el-table-column>
             </el-table>
         </el-card>
