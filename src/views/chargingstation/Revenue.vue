@@ -92,7 +92,7 @@
         <el-card class="mt">
             <el-table :data="list" style="width: 100%" v-loading="loading">
                 <el-table-column type="index" label="序号" width="80" />
-                <el-table-column prop="name" label="站点名称" width="180" />
+                <el-table-column prop="name" label="chong dian zhan名称" width="180" />
                 <el-table-column prop="city" label="所属城市" />
                 <el-table-column prop="fast" label="快充数" />
                 <el-table-column prop="slow" label="慢充数" />
@@ -120,6 +120,7 @@ onMounted(() => {
     window.addEventListener("resize", handleResize);
 });
 const list = ref([]);
+const loading = ref<boolean>(false);
 onUnmounted(() => {
     window.removeEventListener("resize", handleResize);
     if (chartInstance) {
@@ -258,6 +259,7 @@ const handleResize = () => {
 };
 const loadData = async () => {
     try {
+        loading.value = true;
         // 获取营收列表数据
         const {data:{total,list}} = await revenueListApi({
             page: 1,
@@ -265,6 +267,7 @@ const loadData = async () => {
             name: "",
         });
         console.log("营收列表数据:", total,list);
+        loading.value = false;
     } catch (error) {
         console.error("加载数据失败:", error);
     }
