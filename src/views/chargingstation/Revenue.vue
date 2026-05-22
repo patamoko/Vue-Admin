@@ -235,19 +235,18 @@ const initChart = () => {
 
     chartInstance.setOption(option);
 };
-
 const handleResize = () => {
     if (chartInstance) {
         chartInstance.resize();
     }
 };
 const loadData = async () => {
-    const res = await revenueListApi({
+    const {data:{total,list}} = await revenueListApi({
         page: 1,
         pageSize: 10,
-        name: "2023-05-01",
+        name: "",
     });
-    console.log(res);
+    console.log(total,list);
 };
 </script>
 <style lang="less" scoped>
