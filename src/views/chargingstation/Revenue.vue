@@ -308,11 +308,13 @@ const loadData = async () => {
   list.value = processedList;
   loading.value = false;
 };
-const handleSizeChange = (val: number) => {
-  console.log(val);
+const handleSizeChange = (size: number) => {
+  pageInfo.pageSize = size;
+  loadData();
 };
-const handleCurrentChange = (val: number) => {
-  console.log(val);
+const handleCurrentChange = (page: number) => {
+  pageInfo.page = page;
+  loadData();
 };
 </script>
 <style lang="less" scoped>
