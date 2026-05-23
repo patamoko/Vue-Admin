@@ -132,17 +132,19 @@
                 layout="total, sizes, prev, pager, next, jumper"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
+                background
+                class="fr mt mb"
             />
         </el-card>
     </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, reactive } from "vue";
 import * as echarts from "echarts";
 import { TrendCharts } from "@element-plus/icons-vue";
 import { revenueChartApi, revenueListApi } from "@/api/chargingstation";
 let chartInstance: echarts.ECharts | null = null;
-
+const total = ref(0);
 onMounted(() => {
     initChart();
     window.addEventListener("resize", handleResize);
@@ -150,6 +152,18 @@ onMounted(() => {
 });
 const list = ref([]);
 const loading = ref<boolean>(false);
+const pageInfo = reactive({
+    page: 1,
+    pageSize: 10
+});
+const handleSizeChange = (val: number) => {
+    pageInfo.pageSize = val;
+    loadData();
+};
+const handleCurrentChange = (val: number) => {
+    pageInfo.page = val;
+    loadData();
+};
 onUnmounted(() => {
     window.removeEventListener("resize", handleResize);
     if (chartInstance) {
