@@ -307,8 +307,8 @@ const loadData = async () => {
     const {
         data: { total, list: fetchedList },
     } = await revenueListApi({
-        page: pageInfo.page,
-        pageSize: pageInfo.pageSize,
+        page: 1,
+        pageSize: 10,
         name: "",
     });
     console.log("营收列表数据:", total, fetchedList);
