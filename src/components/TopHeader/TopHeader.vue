@@ -1,65 +1,68 @@
 <template>
-    <div class="header">
-        <div class="personal">
-            <el-badge :is-dot="info > 0" class="item">
-                <el-icon>
-                    <Bell />
-                </el-icon>
-            </el-badge>
-            <el-avatar :src="top" class="ml mr"/>
-            <el-dropdown @command="handleCommand">
-                <span class="el-dropdown-link">
-                    欢迎回来{{ username }}
-                    <el-icon class="el-icon--right">
-                        <arrow-down />
-                    </el-icon>
-                </span>
-                <template #dropdown>
-                    <el-dropdown-menu>
-                        <el-dropdown-item icon="User" command="user">个人中心</el-dropdown-item>
-                        <el-dropdown-item icon="SwitchButton"  command="logout">退出登录</el-dropdown-item>
-                    </el-dropdown-menu>
-                </template>
-            </el-dropdown>
-        </div>
+  <div class="header">
+    <div class="personal">
+      <el-badge :is-dot="info > 0" class="item">
+        <el-icon>
+          <Bell />
+        </el-icon>
+      </el-badge>
+      <el-avatar :src="top" class="ml mr" />
+      <el-dropdown @command="handleCommand">
+        <span class="el-dropdown-link">
+          欢迎回来{{ username }}
+          <el-icon class="el-icon--right">
+            <arrow-down />
+          </el-icon>
+        </span>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item icon="User" command="user"
+              >个人中心</el-dropdown-item
+            >
+            <el-dropdown-item icon="SwitchButton" command="logout"
+              >退出登录</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref } from "vue";
 import { useUserStore } from "@/store/auth";
 import { storeToRefs } from "pinia";
-import {useRouter} from "vue-router"
-import top from "@/img/aa.jpg"
-const router=useRouter()
-const userStore=useUserStore();
-const {username}=storeToRefs(userStore) 
-const info = ref(5)
+import { useRouter } from "vue-router";
+import top from "@/img/B5696542A33C7250EBA50F49D0B3E157.png";
+const router = useRouter();
+const userStore = useUserStore();
+const { username } = storeToRefs(userStore);
+const info = ref(5);
 
-
-const handleCommand=(command:string)=>{
-    if(command=="user"){
-        router.push("/personal")
-    }else{
-        userStore.logout()
-        router.push("/login")
-    }
-}
+const handleCommand = (command: string) => {
+  if (command == "user") {
+    router.push("/personal");
+  } else {
+    userStore.logout();
+    router.push("/login");
+  }
+};
 </script>
 
 <style lang="less" scoped>
-.header{
-    background-color: white;
+.header {
+  background-color: white;
+  height: 60px;
+  padding: 0 20px;
+  .personal {
+    float: right;
+    display: flex;
     height: 60px;
-    padding: 0 20px;
-    .personal{
-        float: right;
-        display: flex;
-        height: 60px;
-        align-items: center;
-        .item{
-            margin-top: 10px;
-        }
+    align-items: center;
+    .item {
+      margin-top: 10px;
     }
+  }
 }
 </style>
