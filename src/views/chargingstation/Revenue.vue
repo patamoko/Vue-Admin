@@ -133,6 +133,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
 import { TrendCharts } from "@element-plus/icons-vue";
 import { revenueChartApi, revenueListApi } from "@/api/chargingstation";
+import { usePagination } from "@/hooks/usePagination";
 let chartInstance: echarts.ECharts | null = null;
 
 onMounted(() => {
@@ -304,6 +305,7 @@ const loadData = async () => {
 onMounted(() => {
     loadData();
 });
+const { total, pageInfo, handleSizeChange, handleCurrentChange, resetPagination } = usePagination(loadData);
 </script>
 <style lang="less" scoped>
 .revenue-page {
