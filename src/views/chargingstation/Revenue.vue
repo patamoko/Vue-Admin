@@ -152,19 +152,12 @@ onMounted(() => {
     loadData(); // 页面加载时获取数据
 });
 const list = ref([]);
-const loading = ref<boolean>(false);
 const pageInfo = reactive({
     page: 1,
     pageSize: 10
 });
-const handleSizeChange = (val: number) => {
-    pageInfo.pageSize = val;
-    loadData();
-};
-const handleCurrentChange = (val: number) => {
-    pageInfo.page = val;
-    loadData();
-};
+const total = ref(0);
+const loading = ref<boolean>(false);
 onUnmounted(() => {
     window.removeEventListener("resize", handleResize);
     if (chartInstance) {
@@ -323,6 +316,13 @@ const loadData = async () => {
     }));
     list.value = processedList;
     loading.value = false;
+};
+const handleSizeChange = (val: number) => {
+
+    console.log(val);
+};
+const handleCurrentChange = (val: number) => {
+    console.log(val);
 };
 </script>
 <style lang="less" scoped>
