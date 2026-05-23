@@ -125,6 +125,16 @@
                 <el-table-column label="服务费营收" prop="serviceFee" />
                 <el-table-column label="会员卡储值金额" prop="member" />
             </el-table>
+            <el-pagination 
+                v-model:current-page="pageInfo.page" 
+                v-model:page-size="pageInfo.pageSize"
+                :page-sizes="[10, 20, 30, 40]" 
+                layout="total, sizes, prev, pager, next, jumper" 
+                :total="total"
+                @size-change="handleSizeChange" 
+                @current-change="handleCurrentChange" 
+                background
+                />
         </el-card>
     </div>
 </template>
@@ -289,6 +299,7 @@ const loadData = async () => {
         pageSize: 10,
         name: "",
     });
+    setTotal(total);
     console.log("营收列表数据:", total, fetchedList);
     // 计算单日总收入day字段
     const processedList = fetchedList.map((item: any) => ({
@@ -305,7 +316,7 @@ const loadData = async () => {
 onMounted(() => {
     loadData();
 });
-const { total, pageInfo, handleSizeChange, handleCurrentChange, resetPagination } = usePagination(loadData);
+const { total, pageInfo, handleSizeChange, handleCurrentChange, setTotal } = usePagination(loadData);
 </script>
 <style lang="less" scoped>
 .revenue-page {
