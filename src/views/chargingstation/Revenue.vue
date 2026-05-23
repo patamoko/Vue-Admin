@@ -291,9 +291,7 @@ const loadData = async () => {
   const {
     data: { total: apiTotal, list: fetchedList },
   } = await revenueListApi({
-    page: 1,
-    pageSize: 10,
-    name: "",
+    ...pageInfo,
   });
 
   console.log("营收列表数据:", apiTotal, fetchedList);
