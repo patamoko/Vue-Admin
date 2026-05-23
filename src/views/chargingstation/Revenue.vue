@@ -128,6 +128,7 @@
             <el-pagination
                 :total="total"
                 :page-size="pageInfo.pageSize"
+                :page-sizes="[10, 20, 30, 40]"
                 :current-page.sync="pageInfo.page"
                 layout="total, sizes, prev, pager, next, jumper"
                 @size-change="handleSizeChange"
@@ -306,8 +307,8 @@ const loadData = async () => {
     const {
         data: { total, list: fetchedList },
     } = await revenueListApi({
-        page: 1,
-        pageSize: 10,
+        page: pageInfo.page,
+        pageSize: pageInfo.pageSize,
         name: "",
     });
     console.log("营收列表数据:", total, fetchedList);
