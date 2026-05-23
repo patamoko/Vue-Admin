@@ -100,8 +100,8 @@
                 <el-table-column label="月度总收入" prop="month">
                     <template #default="scope">
                         <span>{{ scope.row.month }}</span>
-                        <el-tag :type="scope.row.mpercent > 0 ? 'success' : 'danger'">
-                            {{ scope.row.mpercent > 0 ? "+" + scope.row.mpercent + "%" : "-" + scope.row.mpercent + "%" }}
+                        <el-tag :type="scope.row.mpercent > 0 ? 'success' : 'danger'" class="ml">
+                            {{ scope.row.mpercent > 0 ? "+" + scope.row.mpercent + "%" :scope.row.mpercent +"%" }}
                         </el-tag>
                     </template>
                 </el-table-column>
