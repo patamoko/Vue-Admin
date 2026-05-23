@@ -96,7 +96,7 @@
                 <el-table-column label="充电站ID" prop="id" />
                 <el-table-column label="所属城市" prop="city" />
                 <el-table-column label="充电桩总量" prop="count" />
-                <el-table-column label="单日总收入"  />
+                <el-table-column label="单日总收入"  prop="day" />
                 <el-table-column label="月度总收入" prop="month">
                     <template #default="scope">
                         <span>{{ scope.row.month }}</span>
