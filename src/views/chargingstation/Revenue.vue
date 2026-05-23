@@ -280,9 +280,10 @@ const loadData = async () => {
     console.log("营收列表数据:", total, fetchedList);
     list.value = fetchedList;
     loading.value = false;
-    list.value.map((item){
-        
-    })
+    list.value.map((item:any)=>({
+        ...item,
+        day:item.electricity+item.parkingFee+item.serviceFee+item.member,
+    }))
 };
 onMounted(() => {
     loadData();
