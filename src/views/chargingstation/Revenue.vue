@@ -90,8 +90,8 @@
       </el-col>
     </el-row>
     <el-card class="mt">
-      <el-form-input v-model="fromParams.input" placeholder="请输入站点名称或ID" />
-           <el-table :data="list" style="width: 100%" v-loading="loading">
+      <el-input v-model="name" placeholder="请输入充电站名称" />
+      <el-table :data="list" style="width: 100%" v-loading="loading">
         <el-table-column type="index" label="序号" width="80" />
         <el-table-column label="充电站名称" prop="name" />
         <el-table-column label="充电站ID" prop="id" />
@@ -139,6 +139,11 @@ import { TrendCharts } from "@element-plus/icons-vue";
 import { revenueChartApi, revenueListApi } from "@/api/chargingstation";
 let chartInstance: echarts.ECharts | null = null;
 const total = ref(0);
+const name = ref("");
+const fromParams = reactive({
+    input: "",
+    value: 1,
+});
 onMounted(() => {
   initChart();
   window.addEventListener("resize", handleResize);
