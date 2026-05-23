@@ -325,6 +325,7 @@ const handleCurrentChange = (page: number) => {
   loadData();
 };
 const handleSearch = () => {
+  pageInfo.page = 1;
   loadData();
 };
 </script>
