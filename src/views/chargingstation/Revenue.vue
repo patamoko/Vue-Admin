@@ -134,6 +134,7 @@
                 @size-change="handleSizeChange" 
                 @current-change="handleCurrentChange" 
                 background
+                class="fr mt  mb"  
                 />
         </el-card>
     </div>
@@ -299,7 +300,6 @@ const loadData = async () => {
         pageSize: 10,
         name: "",
     });
-    setTotal(total);
     console.log("营收列表数据:", total, fetchedList);
     // 计算单日总收入day字段
     const processedList = fetchedList.map((item: any) => ({
