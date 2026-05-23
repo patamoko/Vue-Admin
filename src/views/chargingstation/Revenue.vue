@@ -1,101 +1,99 @@
 <template>
-    <div class="revenue-page">
-        <el-row :gutter="20" class="mb-20">
-            <el-col :span="4">
-                <div class="stat-card">
-                    <div class="stat-title">今日总收入(元)</div>
-                    <div class="stat-number">12,239,824</div>
-                    <div class="stat-change positive">
-                        <el-icon>
-                            <TrendCharts />
-                        </el-icon>
-                        21%
-                    </div>
+      <div class="revenue-page">   
+         <el-row :gutter="20" class="mb-   20">
+               <el-col       :span="4  ">
+                <div        class="sta   t-card">
+                    <div class     ="stat-tit     le">今日总收入(元)</div>
+                    <div    v class="s      tat-number">12,239,824</div>
+                                <div clas       s="stat-change        positive">
+                                    <el-icon        icon>
+                                             <TrendCh     arts />   
+                                 </el-icon>
+                                21%
+                              </div>
                 </div>
-            </el-col>
+                    </el-co  l>
             <el-col :span="4">
-                <div class="stat-card">
-                    <div class="stat-title">本月总收入(万元)</div>
-                    <div class="stat-number">2,924</div>
-                    <div class="stat-change positive">
-                        <el-icon>
-                            <TrendCharts />
-                        </el-icon>
-                        21%
-                    </div>
+                          <div class="stat-card">
+                                <div class          ="stat-title">    本月总收入(万元)</div>
+                                <div  class="stat           -numb      er">2,924<    /div>
+                                 <div v class="st    at-cha  nge positive">
+                                <el-icon>
+                                      <TrendCharts />
+                                  </el-icon>
+                                21%
+                      </div>
+                       </div>
+                             </el-col>
+              <el-col        :span="4">     
+                   <div cl         ass="        stat-card"  >
+                            <div   div cl   ass="stat-t itle">     会员卡储值金额(元)</div>
+                            <div class="sta    t-number">      239,824</div>
+                    <div c   lass="stat       -change positive">
+                         <el-i         con>
+                            <T        rendCharts /    >
+                                      </el-icon>
+                                    21%     
+                                     </div>
+                        </di v>
+                 <   /el-co   l>
+            <el-      col :spa  n="4">
+                <div      div class=    "stat-card">
+                    <div cl     ass="stat-     title">服务费总金额(元)</div>
+                       <div        class="stat-number">16,824</div>
+                                <div        class="stat-c       hange negative"> 
+                                          <el-icon>
+                                             <T      rendChar   ts />   
+                              </el-icon>
+                                4%
+                              </div>
                 </div>
-            </el-col>
-            <el-col :span="4">
-                <div class="stat-card">
-                    <div class="stat-title">会员卡储值金额(元)</div>
-                    <div class="stat-number">239,824</div>
-                    <div class="stat-change positive">
-                        <el-icon>
+                   <   /el-col>
+            <el-col :span="4">     
+                     <div class="stat-card">
+                                <div class="stat-tit              le">停车费总金额(元)</div   v>
+                                     <div class="    stat-     number">9,     687</div    >
+                              <div class   ="st at-change neg   ativ e">
+                              <el-icon  >
+                                            <TrendCharts />
+                                    </el-icon>
+                                      4%
+                    </div            iv>
+                          </div>
+                      </el-col>
+            <el-col   :span="4">
+                          <div class="stat-card">
+                    <div        class="sta   t-title"      >电度总金额(元  )</div>
+                           <div    class="sta  t-nu  mber">223,674</div>
+                          <div class="stat-change positive">
+                                <el-icon>
                             <TrendCharts />
-                        </el-icon>
-                        21%
+                                </el-icon>
+                             21%   
                     </div>
-                </div>
-            </el-col>
-            <el-col :span="4">
-                <div class="stat-card">
-                    <div class="stat-title">服务费总金额(元)</div>
-                    <div class="stat-number">16,824</div>
-                    <div class="stat-change negative">
-                        <el-icon>
-                            <TrendCharts />
-                        </el-icon>
-                        4%
-                    </div>
-                </div>
-            </el-col>
-            <el-col :span="4">
-                <div class="stat-card">
-                    <div class="stat-title">停车费总金额(元)</div>
-                    <div class="stat-number">9,687</div>
-                    <div class="stat-change negative">
-                        <el-icon>
-                            <TrendCharts />
-                        </el-icon>
-                        4%
-                    </div>
-                </div>
-            </el-col>
-            <el-col :span="4">
-                <div class="stat-card">
-                    <div class="stat-title">电度总金额(元)</div>
-                    <div class="stat-number">223,674</div>
-                    <div class="stat-change positive">
-                        <el-icon>
-                            <TrendCharts />
-                        </el-icon>
-                        21%
-                    </div>
-                </div>
+                      </div>  
             </el-col>
         </el-row>
 
-        <el-row>
+              <  el-row>
             <el-col :span="24">
-                <el-card>
-                    <template #header>
-                        <div class="card-header">
-                            <span>营收趋势分析</span>
+                        <el-card>
+                     <template #he      ader>
+                          <div class="card-header       ">
+                               <span>营     收趋势分析</span>       
                         </div>
-                    </template>
-                    <div class="chart-container">
-                        <div id="revenueChart" style="width: 100%; height: 220px"></div>
-                    </div>
-                </el-card>
-            </el-col>
-        </el-row>
-        <el-card class="mt">
-            <el-table :data="list" style="width: 100%" v-loading="loading">
-                <el-table-column type="index" label="序号" width="80" />
-                <el-table-column label="充电站名称" prop="name" />
-                <el-table-column label="充电站ID" prop="id" />
-                <el-table-column label="所属城市" prop="city" />
-                <el-table-column label="充电桩总量" prop="count" />
+              emplate>
+  <el-tag                 <div class="chart-container">
+         <div id= style="width: 10height: 220px"{{>/div>
+                         </el-card>
+           /<el-row>
+        <elcar }}d ass="mt">
+        <el-table :data=          "list" style="width: 10        0%" v-loading="loading">
+                        <el-table-column type="index" label="序号" width=        "80" />
+                <el-table-column label="充电站名称" prop=        "name" />
+                <el-table-column label="充电站ID" pro        p="id" />
+                <el-table-column label="所属城市" pr      op="city" />
+                    <el-t  able-column label="充电桩总量" prop="count" />
                 <el-table-column label="单日总收入"  prop="day" />
                 <el-table-column label="月度总收入" prop="month">
                     <template #default="scope">
@@ -250,53 +248,50 @@ const initChart = () => {
                 data: [80, 60, 120, 150, 180, 100, 160],
                 itemStyle: {
                     color: "#5470c6",
-                    borderRadius: [4, 4, 0, 0],
-                },
+                      borderRadius: [4, 4, 0, 0],
+                  },
             },
-        ],
+        ]  ,
     };
 
-    chartInstance.setOption(option);
+    chartIn  stance.setOption (o ption);
 };
-const handleResize = () => {
+const ha  ndleResize = () =>   {
     if (chartInstance) {
-        chartInstance.resize();
+        chartI ns tance.resize();
     }
 };
-const loadData = async () => {
-    loading.value = true;
+  const loadData = async () => {
+    load  ing.value =     true;
         // 获取营收列表数据
-        const {
-            data: { total, list: fetchedList },
-        } = await revenueListApi({
-            page: 1,
-            pageSize: 10,
-            name: "",
+          const {
+            d at a: { total, list:   fetchedList },
+          } = await revenueListApi({
+              page: 1,
+              pageSize: 10,
+              name:  "" ,
         });
         console.log("营收列表数据:", total, fetchedList);
         list.value = fetchedList;
         loading.value = false;
-onMounted(() => {
-    loadData();
-});
 </script>
-<style lang="less" scoped>
-.revenue-page {
+<style lang="les  s" s  coped>
+.revenue-pa    ge {
     padding: 20px;
-}
+}  
 
-.mb-20 {
-    margin-bottom: 20px;
-}
+. mb -20 {
+    mar  gin-  bottom: 20px;
+}    
 
 .stat-card {
     background: white;
-    padding: 20px;
-    border-radius: 8px;
-    color: #333;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e8e8e8;
-    transition: transform 0.3s ease;
+    padding:     20px;
+    border-  radi  us: 8px;
+    color:  #3 33;
+    box-shadow: 0 2  px 8px rgba(0, 0, 0, 0  .08);
+    border:  1p x solid #e8e8e8;
+    transition: transfor  m 0.3s ease;
 
     &:hover {
         transform: translateY(-2px);
