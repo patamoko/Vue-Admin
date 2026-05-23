@@ -90,8 +90,11 @@
       </el-col>
     </el-row>
     <el-card class="mt">
-      <el-input v-model="name" placeholder="请输入充电站名称" style="max-width: 400px" />
-      <el-button type="primary" @click="handleSearch">查询</el-button>
+      <el-input v-model="name" placeholder="请输入充电站名称" style="max-width: 400px">
+        <template #append>
+          <el-button icon="Search" @click="handleSearch"></el-button>
+        </template>
+      </el-input>
       <el-table :data="list" style="width: 100%" v-loading="loading">
         <el-table-column type="index" label="序号" width="80" />
         <el-table-column label="充电站名称" prop="name" />
@@ -296,6 +299,7 @@ const loadData = async () => {
   } = await revenueListApi({
     ...pageInfo,
     status: 1,
+    name: name.value,
   });
 
   console.log("营收列表数据:", apiTotal, fetchedList);
@@ -318,6 +322,9 @@ const handleSizeChange = (size: number) => {
 };
 const handleCurrentChange = (page: number) => {
   pageInfo.page = page;
+  loadData();
+};
+const handleSearch = () => {
   loadData();
 };
 </script>
