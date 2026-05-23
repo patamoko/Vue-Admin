@@ -156,7 +156,6 @@ const pageInfo = reactive({
     page: 1,
     pageSize: 10
 });
-const total = ref(0);
 const loading = ref<boolean>(false);
 onUnmounted(() => {
     window.removeEventListener("resize", handleResize);
@@ -304,8 +303,9 @@ const loadData = async () => {
         pageSize: 10,
         name: "",
     });
+    
     console.log("营收列表数据:", total, fetchedList);
-    // 计算单日总收入day字段
+    total.value = total;
     const processedList = fetchedList.map((item: any) => ({
         ...item,
         day:
