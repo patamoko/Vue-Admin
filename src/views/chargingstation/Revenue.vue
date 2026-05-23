@@ -265,7 +265,6 @@ const handleResize = () => {
 };
 const loadData = async () => {
     loading.value = true;
-    try {
         // 获取营收列表数据
         const {
             data: { total, list: fetchedList },
@@ -276,13 +275,9 @@ const loadData = async () => {
         });
         console.log("营收列表数据:", total, fetchedList);
         list.value = fetchedList;
-    } catch (error) {
-        console.error("加载数据失败:", error);
-        list.value = [];
-    } finally {
         loading.value = false;
+        list.value.map(())
     }
-};
 onMounted(() => {
     loadData();
 });
