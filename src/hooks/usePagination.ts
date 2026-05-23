@@ -18,4 +18,10 @@ export function usePagination( loadData:()=>Promise<any>,initalPageSize=10){
         pageInfo.pageSize=10;
         loadData()
     }
+    return {
+        pageInfo,
+        handleSizeChange,
+        handleCurrentChange,
+        resetPagination
+    }
 }
