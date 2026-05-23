@@ -13,4 +13,9 @@ export function usePagination( loadData:()=>Promise<any>,initalPageSize=10){
         pageInfo.page=page;
         loadData()
     }
+    const resetPagination=()=>{
+        pageInfo.page=1;
+        pageInfo.pageSize=10;
+        loadData()
+    }
 }
