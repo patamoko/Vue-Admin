@@ -90,7 +90,8 @@
       </el-col>
     </el-row>
     <el-card class="mt">
-      <el-input v-model="name" placeholder="请输入充电站名称" />
+      <el-input v-model="name" placeholder="请输入充电站名称" style="max-width: 400px" />
+      <el-button type="primary" @click="handleSearch">查询</el-button>
       <el-table :data="list" style="width: 100%" v-loading="loading">
         <el-table-column type="index" label="序号" width="80" />
         <el-table-column label="充电站名称" prop="name" />
@@ -140,10 +141,6 @@ import { revenueChartApi, revenueListApi } from "@/api/chargingstation";
 let chartInstance: echarts.ECharts | null = null;
 const total = ref(0);
 const name = ref("");
-const fromParams = reactive({
-    input: "",
-    value: 1,
-});
 onMounted(() => {
   initChart();
   window.addEventListener("resize", handleResize);
