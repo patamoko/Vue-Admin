@@ -19,6 +19,9 @@ enum Api{
 function listApi(data:ListType){
     return post(Api.List,data)
 }
+function revenueListApi(data:ListType){
+    return post(Api.revenueList,data)
+}
 function editApi(data:RowType){
     return post(Api.Edit,data)
 }
@@ -28,4 +31,4 @@ function deleteApi(data:RowType){
 function revenueChartApi(data:RowType){
     return get(Api.revenueChart,data)
 }
-export {listApi,editApi,deleteApi,revenueChartApi}
+export {listApi,editApi,deleteApi,revenueChartApi,revenueListApi}
