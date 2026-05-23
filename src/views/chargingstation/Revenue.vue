@@ -331,11 +331,14 @@ onMounted(() => {
 <style lang="less" scoped>
 .revenue-page {
     padding: 20px;
-    padding: 20px;
+    padding: 20px;  
+  padding: 2
+        margin-bottom: 20px;0px;
 
     .mb-20 {
         margin-bottom: 20px;
-        margin-bottom: 20px;
+  
+            background: white;      margin-bottom: 20px;
 
         .stat-card {
             background: white;
@@ -396,4 +399,5 @@ onMounted(() => {
 
                                         .chart-container {
                                             padding: 5px 0;
-                                            padding: 5px 0;</style>
+                                            padding: 5px 0;
+                                            </style>
