@@ -90,7 +90,7 @@
             </el-col>
         </el-row>
         <el-card class="mt">
-            <el-table :data="list" style="width: 100%" v-loading="loading" >
+            <el-table :data="list" style="width: 100%" v-loading="loading">
                 <el-table-column type="index" label="序号" width="80" />
                 <el-table-column label="充电站名称" prop="name" />
                 <el-table-column label="充电站ID" prop="id" />
@@ -281,9 +281,7 @@ const handleResize = () => {
 const loadData = async () => {
     loading.value = true;
     // 获取营收列表数据
-    const {
-        data: { total, list: fetchedList },
-    } = await revenueListApi({
+    const {data: { total, list: fetchedList },} = await revenueListApi({
         page: 1,
         pageSize: 10,
         name: "",
@@ -301,74 +299,77 @@ const loadData = async () => {
     list.value = processedList;
     loading.value = false;
 };
-  // 初始化加载第一页数据
-    loadData();
+
+// 初始化加载第一页数据
+loadData();
 </script>
 const { total, pageInfo, handleSizeChange, handleCurrentChange, setTotal } = usePagination(loadData);
 <style lang="less" scoped>
 .revenue-page {
-  padding: 20px;
+    padding: 20px;
     padding: 20px;
 
-.mb-20 {
-  margin-bottom: 20px;
-    margin-bottom: 20px;
+    .mb-20 {
+        margin-bottom: 20px;
+        margin-bottom: 20px;
 
-.stat-card {
-  background: white;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    color: #333;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e8e8e8;
-    transition: transform 0.3s ease;
-  &:hover {
-    &:hover {
-        transform: translateY(-2px);
-    }
+        .stat-card {
+            background: white;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8e8e8;
+            transition: transform 0.3s ease;
 
-.stat-title {
-  font-size: 12px;
-    font-size: 12px;
-    color: #999;
-    margin-bottom: 10px;
+            &:hover {
+                &:hover {
+                    transform: translateY(-2px);
+                }
 
-.stat-number {
-  font-size: 24px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 8px;
+                .stat-title {
+                    font-size: 12px;
+                    font-size: 12px;
+                    color: #999;
+                    margin-bottom: 10px;
 
-.stat-change {
-  font-size: 12px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  &.positive {
-    &.positive {
-        color: #67c23a;
-        background-color: rgba(103, 194, 58, 0.1);
-        padding: 2px 8px;
-        border-radius: 4px;
-    }
-  &.negative {
-    &.negative {
-        color: #f56c6c;
-        background-color: rgba(245, 108, 108, 0.1);
-        padding: 2px 8px;
-        border-radius: 4px;
-    }
+                    .stat-number {
+                        font-size: 24px;
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: #333;
+                        margin-bottom: 8px;
 
-.card-header {
-  font-size: 16px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #303133;
+                        .stat-change {
+                            font-size: 12px;
+                            font-size: 12px;
+                            display: flex;
+                            align-items: center;
+                            gap: 4px;
 
-.chart-container {
-  padding: 5px 0;
-    padding: 5px 0;
-</style>
+                            &.positive {
+                                &.positive {
+                                    color: #67c23a;
+                                    background-color: rgba(103, 194, 58, 0.1);
+                                    padding: 2px 8px;
+                                    border-radius: 4px;
+                                }
+
+                                &.negative {
+                                    &.negative {
+                                        color: #f56c6c;
+                                        background-color: rgba(245, 108, 108, 0.1);
+                                        padding: 2px 8px;
+                                        border-radius: 4px;
+                                    }
+
+                                    .card-header {
+                                        font-size: 16px;
+                                        font-size: 16px;
+                                        font-weight: 600;
+                                        color: #303133;
+
+                                        .chart-container {
+                                            padding: 5px 0;
+                                            padding: 5px 0;</style>
