@@ -276,8 +276,6 @@ const loadData = async () => {
         console.log("营收列表数据:", total, fetchedList);
         list.value = fetchedList;
         loading.value = false;
-        list.value.map(())
-    }
 onMounted(() => {
     loadData();
 });
