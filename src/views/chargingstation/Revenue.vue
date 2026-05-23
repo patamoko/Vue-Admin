@@ -96,7 +96,18 @@
                 <el-table-column label="充电站ID" prop="id" />
                 <el-table-column label="所属城市" prop="city" />
                 <el-table-column label="充电桩总量" prop="count" />
-                <el-table-column label="单日总收入" prop="day" />
+                <el-table-column label="单日总收入" prop="day">
+                    <template #default="scope">
+                        <span>{{ scope.row.day }}</span>
+                        <el-tag :type="scope.row.day > 0 ? 'success' : 'danger'" class="ml">
+                            {{
+                                scope.row.day > 0
+                                    ? "+" + scope.row.day
+                                    : scope.row.day
+                            }}
+                        </el-tag>
+                    </template>
+                </el-table-column>
                 <el-table-column label="月度总收入" prop="month">
                     <template #default="scope">
                         <span>{{ scope.row.month }}</span>
@@ -278,12 +289,17 @@ const loadData = async () => {
         name: "",
     });
     console.log("营收列表数据:", total, fetchedList);
-    list.value = fetchedList;
-    loading.value = false;
-    list.value.map((item:any)=>({
+    // 计算单日总收入day字段
+    const processedList = fetchedList.map((item: any) => ({
         ...item,
-        day:item.electricity+item.parkingFee+item.serviceFee+item.member,
-    }))
+        day:
+            (item.electricity || 0) +
+            (item.parkingFee || 0) +
+            (item.serviceFee || 0) +
+            (item.member || 0),
+    }));
+    list.value = processedList;
+    loading.value = false;
 };
 onMounted(() => {
     loadData();
