@@ -99,10 +99,7 @@
         <el-table-column label="单日总收入" prop="day" sortable>
           <template #default="scope">
             <span>{{ scope.row.day }}</span>
-            <el-tag
-              :type="scope.row.percent > 0 ? 'success' : 'danger'"
-              class="ml"
-            >
+            <el-tag :type="scope.row.percent > 0 ? 'success' : 'danger'" class="ml">
               {{
                 scope.row.percent > 0
                   ? "+" + scope.row.percent + "%"
@@ -114,10 +111,7 @@
         <el-table-column label="月度总收入" prop="month">
           <template #default="scope">
             <span>{{ scope.row.month }}</span>
-            <el-tag
-              :type="scope.row.mpercent > 0 ? 'success' : 'danger'"
-              class="ml"
-            >
+            <el-tag :type="scope.row.mpercent > 0 ? 'success' : 'danger'" class="ml">
               {{
                 scope.row.mpercent > 0
                   ? "+" + scope.row.mpercent + "%"
@@ -131,17 +125,9 @@
         <el-table-column label="服务费营收" prop="serviceFee" />
         <el-table-column label="会员卡储值金额" prop="member" />
       </el-table>
-      <el-pagination
-        :total="total"
-        :page-size="pageInfo.pageSize"
-        :page-sizes="[10, 20, 30, 40]"
-        :current-page.sync="pageInfo.page"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        background
-        class="fr mt mb"
-      />
+      <el-pagination :total="total" :page-size="pageInfo.pageSize" :page-sizes="[10, 20, 30, 40]"
+        :current-page.sync="pageInfo.page" layout="total, sizes, prev, pager, next, jumper"
+        @size-change="handleSizeChange" @current-change="handleCurrentChange" background class="fr mt mb" />
     </el-card>
   </div>
 </template>
