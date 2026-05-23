@@ -1,6 +1,6 @@
 import { reactive} from "vue";
-
 export function usePagination( loadData:()=>Promise<any>,initalPageSize=10){
+    const total=ref(0)
     const pageInfo=reactive({
         page:1,
         pageSize:initalPageSize
@@ -15,9 +15,10 @@ export function usePagination( loadData:()=>Promise<any>,initalPageSize=10){
     }
     const resetPagination=()=>{
         pageInfo.page=1;
-        pageInfo.pageSize=10;
+        pageInfo.pageSize=initalPageSize;
         loadData()
     }
+    
     return {
         pageInfo,
         handleSizeChange,

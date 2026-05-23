@@ -7,7 +7,7 @@ export  function useChart(chartRef:Ref<HTMLElement|null>,setChartData:any){
     const initChart=async ()=>{
         if(chartRef.value){
             chartInstance.value=markRaw(echarts.init(chartRef.value)) ;
-           const  options=await setChartData()
+        const  options=await setChartData()
 
             chartInstance.value.setOption(options)
 
