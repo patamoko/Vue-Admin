@@ -125,17 +125,6 @@
                 <el-table-column label="服务费营收" prop="serviceFee" />
                 <el-table-column label="会员卡储值金额" prop="member" />
             </el-table>
-            <el-pagination 
-                v-model:current-page="pageInfo.page" 
-                v-model:page-size="pageInfo.pageSize"
-                :page-sizes="[10, 20, 30, 40]" 
-                layout="total, sizes, prev, pager, next, jumper" 
-                :total="total"
-                @size-change="handleSizeChange" 
-                @current-change="handleCurrentChange" 
-                background
-                class="fr mt  mb"  
-                />
         </el-card>
     </div>
 </template>
@@ -144,7 +133,6 @@ import { ref, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
 import { TrendCharts } from "@element-plus/icons-vue";
 import { revenueChartApi, revenueListApi } from "@/api/chargingstation";
-import { usePagination } from "@/hooks/usePagination";
 let chartInstance: echarts.ECharts | null = null;
 
 onMounted(() => {
@@ -313,21 +301,21 @@ const loadData = async () => {
     list.value = processedList;
     loading.value = false;
 };
-onMounted(() => {
+  // 初始化加载第一页数据
     loadData();
-});
-const { total, pageInfo, handleSizeChange, handleCurrentChange, setTotal } = usePagination(loadData);
 </script>
+const { total, pageInfo, handleSizeChange, handleCurrentChange, setTotal } = usePagination(loadData);
 <style lang="less" scoped>
 .revenue-page {
+  padding: 20px;
     padding: 20px;
-}
 
 .mb-20 {
+  margin-bottom: 20px;
     margin-bottom: 20px;
-}
 
 .stat-card {
+  background: white;
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -335,53 +323,52 @@ const { total, pageInfo, handleSizeChange, handleCurrentChange, setTotal } = use
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     border: 1px solid #e8e8e8;
     transition: transform 0.3s ease;
-
+  &:hover {
     &:hover {
         transform: translateY(-2px);
     }
-}
 
 .stat-title {
+  font-size: 12px;
     font-size: 12px;
     color: #999;
     margin-bottom: 10px;
-}
 
 .stat-number {
+  font-size: 24px;
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin-bottom: 8px;
-}
 
 .stat-change {
+  font-size: 12px;
     font-size: 12px;
     display: flex;
     align-items: center;
     gap: 4px;
-
+  &.positive {
     &.positive {
         color: #67c23a;
         background-color: rgba(103, 194, 58, 0.1);
         padding: 2px 8px;
         border-radius: 4px;
     }
-
+  &.negative {
     &.negative {
         color: #f56c6c;
         background-color: rgba(245, 108, 108, 0.1);
         padding: 2px 8px;
         border-radius: 4px;
     }
-}
 
 .card-header {
+  font-size: 16px;
     font-size: 16px;
     font-weight: 600;
     color: #303133;
-}
 
 .chart-container {
+  padding: 5px 0;
     padding: 5px 0;
-}
 </style>
