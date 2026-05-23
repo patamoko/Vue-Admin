@@ -90,7 +90,7 @@
             </el-col>
         </el-row>
         <el-card class="mt">
-            <el-table :data="list" style="width: 100%" v-loading="loading">
+            <el-table :data="list" style="width: 100%" v-loading="loading" >
                 <el-table-column type="index" label="序号" width="80" />
                 <el-table-column label="充电站名称" prop="name" />
                 <el-table-column label="充电站ID" prop="id" />
@@ -99,11 +99,11 @@
                 <el-table-column label="单日总收入" prop="day">
                     <template #default="scope">
                         <span>{{ scope.row.day }}</span>
-                        <el-tag :type="scope.row.day > 0 ? 'success' : 'danger'" class="ml">
+                        <el-tag :type="scope.row.percent > 0 ? 'success' : 'danger'" class="ml">
                             {{
-                                scope.row.day > 0
-                                    ? "+" + scope.row.day
-                                    : scope.row.day
+                                scope.row.percent > 0
+                                    ? "+" + scope.row.percent + "%"
+                                    : scope.row.percent + "%"
                             }}
                         </el-tag>
                     </template>
