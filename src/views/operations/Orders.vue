@@ -57,7 +57,7 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template #default="scope">
-                        <el-button type="primary" size="small">详情</el-button>
+                        <el-button type="primary" size="small" @click="handleDetail(scope.row)">详情</el-button>
                         <el-button type="danger" size="small">删除</el-button>
                     </template>
                 </el-table-column>
@@ -136,6 +136,9 @@ const handleDelete = async () => {
             type: "error",
         });
     }
+}
+const handleDetail = (row: SearchListType) => {
+    console.log(row);
 }
 const { dataList,
     loading,

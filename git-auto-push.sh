@@ -5,8 +5,8 @@
 # 使用方法：./git-auto-push.sh [间隔秒数]
 # 默认间隔：300秒（5分钟）
 
-# 设置默认间隔时间（1分钟=60秒）
-INTERVAL=${1:-60}
+# 设置默认间隔时间（5秒）
+INTERVAL=${1:-5}
 
 # 检查Git是否安装
 if ! command -v git &> /dev/null; then
