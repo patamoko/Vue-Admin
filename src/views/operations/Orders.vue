@@ -58,7 +58,7 @@
                 <el-table-column label="操作">
                     <template #default="scope">
                         <el-button type="primary" size="small" @click="handleDetail(scope.row)">详情</el-button>
-                        <el-button type="danger" size="small">删除</el-button>
+                        <el-button type="danger" size="small" @click="handle(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -139,6 +139,23 @@ const handleDelete = async () => {
 }
 const handleDetail = (row: SearchListType) => {
     console.log(row);
+}
+const handle = async (row: SearchListType) => {
+    try {
+        const res = await batchDeleteApi([row.orderNo]);
+        if (res.code) {
+            ElMessage({
+                message: res.data,
+                type: "success",
+            });
+            loadData();
+        }
+    } catch (error) {
+        ElMessage({
+            message: "删除失败",
+            type: "error",
+        });
+    }
 }
 const { dataList,
     loading,
