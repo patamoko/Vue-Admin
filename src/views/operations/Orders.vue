@@ -70,9 +70,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
-import { useRouter } from "vue-router"
 import { useHttp } from '@/hooks/useHttp';
-import { useTabsStore } from '@/store/tabs';
 import { currentListApi } from "@/api/chargingstation"
 import { batchDeleteApi } from "@/api/operation"
 import { ElMessage } from 'element-plus';
@@ -140,19 +138,8 @@ const handleDelete = async () => {
         });
     }
 }
-const router = useRouter();
-const tabsStore = useTabsStore();
-
 const handleDetail = (row: SearchListType) => {
     console.log(row);
-    const url = `/operations/detail/${row.orderNo}`;
-    const tabName = `订单详情-${row.orderNo}`;
-
-    // 添加到标签页
-    tabsStore.addTab(tabName, url, 'Document');
-
-    // 跳转到详情页面
-    router.push(url);
 }
 const handle = async (row: SearchListType) => {
     try {
