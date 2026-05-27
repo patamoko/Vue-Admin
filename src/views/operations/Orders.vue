@@ -139,10 +139,21 @@ const handleDelete = async () => {
         });
     }
 }
+import { useTabsStore } from '@/store/tabs';
+
 const router = useRouter();
+const tabsStore = useTabsStore();
+
 const handleDetail = (row: SearchListType) => {
     console.log(row);
-    router.push(`/operations/detail/${row.orderNo}`);
+    const url = `/operations/detail/${row.orderNo}`;
+    const tabName = `订单详情-${row.orderNo}`;
+
+    // 添加到标签页
+    tabsStore.addTab(tabName, url, 'Document');
+
+    // 跳转到详情页面
+    router.push(url);
 }
 const handle = async (row: SearchListType) => {
     try {
