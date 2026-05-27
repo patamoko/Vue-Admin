@@ -113,7 +113,6 @@ const getStatusType = (status: number): string => {
 };
 
 const fetchOrderDetail = async () => {
-    // 这里可以替换为真实的API请求
     const orderNo = route.params.orderNo as string;
     console.log('获取订单详情:', orderNo);
 
