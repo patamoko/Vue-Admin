@@ -2,9 +2,9 @@ import {onMounted, reactive, ref,unref} from "vue"
 import {post} from "@/utils/http"
 export function useHttp<T>(url:string,initialParams:any){
     const dataList=ref<T[]>([]); //用来存表格的
-    const loading=ref<boolean>(false);
-    const totals=ref<number>(0);
-    const pageInfo=reactive({
+    const loading=ref<boolean>(false);//用来控制loading的显示
+    const totals=ref<number>(0);//用来存总条数
+    const pageInfo=reactive({//用来存分页信息
         page:1,
         pageSize:10
     })
@@ -18,7 +18,7 @@ export function useHttp<T>(url:string,initialParams:any){
             console.log(error)
         } finally{
             loading.value=false
-        } 
+        }
     }
     onMounted(()=>{
         loadData()

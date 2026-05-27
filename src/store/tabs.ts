@@ -24,7 +24,6 @@ export const useTabsStore=defineStore("tabs",()=>{
             }else{
                 return 
             }
-           
         }
 
         tabs.value=tabs.value.filter(tab=>tab.name!==name)

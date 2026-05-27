@@ -112,27 +112,27 @@
                 <div class="quick mt mb">
                     <el-row>
                         <el-col :span="4">
-                            <img :src="repair">
+                            <img :src="repair" @click="$router.push('/chargingstation/monitor')">
                             <p>设备维修</p>
                         </el-col>
                         <el-col :span="4">
-                            <img :src="daily">
+                            <img :src="daily" @click="$router.push('/chargingstation/monitor')">
                             <p>每日日报</p>
                         </el-col>
                         <el-col :span="4">
-                            <img :src="progress">
+                            <img :src="progress" @click="$router.push('/chargingstation/monitor')">
                             <p>任务进度</p>
                         </el-col>
                         <el-col :span="4">
-                            <img :src="total">
+                            <img :src="total" @click="$router.push('/chargingstation/monitor')">
                             <p>营收占比</p>
                         </el-col>
                         <el-col :span="4">
-                            <img :src="money">
+                            <img :src="money" @click="$router.push('/chargingstation/monitor')">
                             <p>营收统计</p>
                         </el-col>
                         <el-col :span="4">
-                            <img :src="remain">
+                            <img :src="remain" @click="$router.push('/chargingstation/monitor')">
                             <p>代办事项</p>
                         </el-col>
                     </el-row>
@@ -157,7 +157,7 @@
         <el-col :span="6">
             <el-card>
                 <template #header>
-                    <div class="card-heder"> 
+                    <div class="card-heder">
                         <h1>设备总览</h1>
                     </div>
                 </template>
@@ -264,13 +264,13 @@
                     <el-timeline-item timestamp="2024/2/3" placement="top" :hollow="true" type="warning">
                         <el-card>
                             <h4>黄河南路超出服务区域</h4>
-                           
+
                         </el-card>
                     </el-timeline-item>
                     <el-timeline-item timestamp="2024/5/17" placement="top" :hollow="true" type="danger">
                         <el-card>
                             <h4>6号机组异常断电</h4>
-                          
+
                         </el-card>
                     </el-timeline-item>
                 </el-timeline>
@@ -450,7 +450,9 @@ useChart(chartRef, setChartData)
 useChart(chartRef2, setChartData2)
 useChart(chartRef3, setChartData3)
 
-console.log(555,import.meta.env.VITE_API_URL)
+console.log(555, import.meta.env.VITE_API_URL)
+
+
 
 </script>
 

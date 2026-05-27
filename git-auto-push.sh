@@ -5,14 +5,14 @@
 # 使用方法：./git-auto-push.sh [间隔秒数]
 # 默认间隔：300秒（5分钟）
 
-# 设置默认间隔时间
-INTERVAL=${1:-300}
+# 设置默认间隔时间（1分钟=60秒）
+INTERVAL=${1:-60}
 
-echo "🚀 启动Git自动推送模式..."
-echo "📝 间隔时间：$INTERVAL 秒"
-echo "📂 当前仓库：$(git rev-parse --show-toplevel)"
-echo "🔍 按 Ctrl+C 停止自动推送"
-echo ""
+# 检查Git是否安装
+if ! command -v git &> /dev/null; then
+    echo "❌ 错误：Git未安装，请先安装Git"
+    exit 1
+fi
 
 # 检查是否在Git仓库中
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
@@ -26,13 +26,31 @@ if ! git remote -v | grep -q "origin"; then
     exit 1
 fi
 
+# 检查远程仓库是否可访问
+if ! git ls-remote --exit-code origin &> /dev/null; then
+    echo "❌ 错误：无法连接到远程仓库，请检查网络或SSH配置"
+    exit 1
+fi
+
+# 获取仓库信息
+REPO_NAME=$(git remote get-url origin | awk -F/ '{print $NF}' | sed 's/.git$//')
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+echo "🚀 启动Git自动推送模式..."
+echo "📂 仓库名称：$REPO_NAME"
+echo "🌿 当前分支：$BRANCH_NAME"
+echo "📝 间隔时间：$INTERVAL 秒"
+echo "🔍 按 Ctrl+C 停止自动推送"
+echo ""
+
 # 主循环
 while true; do
     # 获取当前时间
     CURRENT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
     
     # 检查是否有未提交的更改
-    if git status | grep -q "Changes not staged for commit\|Untracked files"; then
+    GIT_STATUS=$(git status --porcelain)
+    if [ -n "$GIT_STATUS" ]; then
         echo "📅 [$CURRENT_TIME] 发现文件变化，开始提交..."
         
         # 添加所有更改
@@ -42,10 +60,12 @@ while true; do
         git commit -m "自动同步：$CURRENT_TIME"
         
         # 推送到远程仓库
-        if git push; then
+        if git push origin $BRANCH_NAME; then
             echo "✅ [$CURRENT_TIME] 成功推送到GitHub"
         else
-            echo "❌ [$CURRENT_TIME] 推送失败，请检查网络连接"
+            echo "❌ [$CURRENT_TIME] 推送失败，将在下次重试"
+            # 回滚提交，避免下次重复提交
+            git reset HEAD~1
         fi
     else
         echo "📅 [$CURRENT_TIME] 没有文件变化"

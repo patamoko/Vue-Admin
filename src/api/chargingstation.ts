@@ -13,7 +13,8 @@ enum Api{
     Edit="/station/edit",
     Delete="/station/delete",
     revenueChart="/revenueChart",
-    revenueList="/revenueList"
+    revenueList="/revenueList",
+    currentList="/currentList"
 }
 
 function listApi(data:ListType){
@@ -31,4 +32,8 @@ function deleteApi(data:RowType){
 function revenueChartApi(data:RowType){
     return get(Api.revenueChart,data)
 }
-export {listApi,editApi,deleteApi,revenueChartApi,revenueListApi}
+function currentListApi(){
+    return post(Api.currentList)
+}
+
+export {listApi,editApi,deleteApi,revenueChartApi,revenueListApi,currentListApi}
