@@ -112,29 +112,34 @@ const getStatusType = (status: number): string => {
     return statusTypes[status - 1] || 'info';
 };
 
-const fetchOrderDetail = async () => {
-    const orderNo = route.params.orderNo as string;
-    console.log('获取订单详情:', orderNo);
+import { useHttp } from '@/hooks/useHttp';
 
-    // 模拟数据
-    orderData.value = {
-        orderNo: orderNo,
-        equipmentNo: 'CD1001',
-        date: '2024-05-27',
-        startTime: '10:30:00',
-        endTime: '11:45:00',
-        money: 125.50,
-        pay: 1,
-        status: 1,
-        stationName: '北京朝阳充电站',
-        userId: 'U20240527001',
-        details: [
-            { name: '电费', quantity: 1, price: 100.00, amount: 100.00 },
-            { name: '服务费', quantity: 1, price: 20.00, amount: 20.00 },
-            { name: '停车费', quantity: 1, price: 5.50, amount: 5.50 }
-        ]
-    };
-};
+interface SearchListType {
+    orderNo: string;
+    equipmentNo: string;
+    date: string;
+    startTime: string;
+    endTime: string;
+    money: number;
+    pay: number;
+    status: number;
+    stationName: string;
+    userId: string;
+    details: OrderDetail[];
+}
+
+const { dataList, loading } = useHttp<SearchListType>(
+    `/orderDetail/${route.params.orderNo}`,
+    {},
+    { immediate: true }
+);
+
+// 监听数据变化
+watch(dataList, (newData) => {
+    if (newData && newData.length > 0) {
+        orderData.value = newData[0];
+    }
+}, { immediate: true });
 
 onMounted(() => {
     fetchOrderDetail();
