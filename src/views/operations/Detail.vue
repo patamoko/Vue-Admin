@@ -65,8 +65,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useHttp } from '@/hooks/useHttp';
 
 interface OrderDetail {
     name: string;
@@ -112,8 +113,6 @@ const getStatusType = (status: number): string => {
     return statusTypes[status - 1] || 'info';
 };
 
-import { useHttp } from '@/hooks/useHttp';
-
 interface SearchListType {
     orderNo: string;
     equipmentNo: string;
@@ -130,8 +129,7 @@ interface SearchListType {
 
 const { dataList, loading } = useHttp<SearchListType>(
     `/orderDetail/${route.params.orderNo}`,
-    {},
-    { immediate: true }
+    {}
 );
 
 // 监听数据变化
@@ -142,7 +140,7 @@ watch(dataList, (newData) => {
 }, { immediate: true });
 
 onMounted(() => {
-    fetchOrderDetail();
+    // 数据已通过useHttp自动加载
 });
 </script>
 
