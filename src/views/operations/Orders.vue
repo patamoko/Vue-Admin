@@ -69,9 +69,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useHttp} from '@/hooks/useHttp';
-import{batchDeleteApi} from "@/api/operation"
+import { ref, onMounted, computed } from 'vue';
+import { useRouter } from "vue-router"
+import { useHttp } from '@/hooks/useHttp';
+import { currentListApi } from "@/api/chargingstation"
+import { batchDeleteApi } from "@/api/operation";
 import { ElMessage } from 'element-plus';
 interface SearchType {
     orderNo: string;
@@ -137,8 +139,10 @@ const handleDelete = async () => {
         });
     }
 }
+const router = useRouter();
 const handleDetail = (row: SearchListType) => {
     console.log(row);
+    router.push(`/operations/detail/${row.orderNo}`);
 }
 const handle = async (row: SearchListType) => {
     try {
