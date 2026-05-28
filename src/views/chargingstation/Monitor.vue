@@ -168,15 +168,15 @@ const handleDelete = async (row: RowType) => {
     }
 };
 const handleAdd = () => {
-    setRowData({
+    Object.assign(currentRow.value, {
         name: "",
         id: "",
         city: "",
-        fast: "",
-        slow: "",
+        fast: 0,
+        slow: 0,
         status: 1,
-        now: "",
-        fault: "",
+        now: 0,
+        fault: 0,
         person: "",
         tel: "",
     });
