@@ -76,6 +76,9 @@ import { batchDeleteApi } from "@/api/operation"
 import { ElMessage } from 'element-plus';
 import { useRouter } from "vue-router"
 import { useTabsStore } from '@/store/tabs';
+const router = useRouter();
+const tabsStore = useTabsStore();
+
 interface SearchType {
     orderNo: string;
     status: number;
