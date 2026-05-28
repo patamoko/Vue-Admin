@@ -138,7 +138,7 @@ const handleDelete = async () => {
         });
     }
 }
-const handleDetail = (row: SearchListType) => {
+const handleDetail = (row: SearchListType) => {//
     console.log(row);
 }
 const handle = async (row: SearchListType) => {
