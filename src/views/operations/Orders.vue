@@ -139,7 +139,17 @@ const handleDelete = async () => {
     }
 }
 const handleDetail = (row: SearchListType) => {//点击详情按钮
-    
+    const url = `/operations/detail/${row.orderNo}`;
+    const tabName = `订单详情-${row.orderNo}`;
+
+    // 添加到标签页
+    tabsStore.addTab(tabName, url, 'Document');
+
+    // 设置当前激活的标签页
+    tabsStore.setCurrentTab(tabName, url);
+
+    // 跳转到详情页面
+    router.push(url);
 }
 const handle = async (row: SearchListType) => {
     try {
