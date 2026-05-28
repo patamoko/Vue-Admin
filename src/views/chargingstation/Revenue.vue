@@ -131,7 +131,7 @@
         <el-table-column label="会员卡储值金额" prop="member" />
       </el-table>
       <el-pagination :total="total" :page-size="pageInfo.pageSize" :page-sizes="[10, 20, 30, 40]"
-        :current-page="pageInfo.page" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange"
+        :current-page.sync="pageInfo.page" layout="total, sizes, prev, pager, next, jumper"
         @current-change="handleCurrentChange" background class="fr mt mb" />
     </el-card>
   </div>

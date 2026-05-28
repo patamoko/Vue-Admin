@@ -135,7 +135,7 @@ const handleReset = () => {
     pageinfo.pageSize = 10;
     loadData();
 };
-const handleEdit = (row: RowType) => {
+const handleEdit = (row: RowType) => {//点击编辑按钮
     setRowData(row);
     dialogVisible.value = true;
 };

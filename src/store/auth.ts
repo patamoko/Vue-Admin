@@ -29,10 +29,10 @@ export const useUserStore = defineStore("user", {
             }
         },
         logout() {
-            this.token=""
-            this.roles=[];
-            this.username=""
-            this.menu=[];
+            this.token = ""
+            this.roles = [];
+            this.username = ""
+            this.menu = [];
             sessionStorage.clear()
 
         }
