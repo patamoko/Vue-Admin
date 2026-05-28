@@ -147,7 +147,7 @@ const handleReset = () => {
     loadData();
 };
 const handleEdit = (row: RowType) => {//点击编辑按钮
-    setRowData(row);
+    Object.assign(currentRow.value, row);
     dialogVisible.value = true;
 };
 const handleDelete = async (row: RowType) => {
