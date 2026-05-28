@@ -92,7 +92,8 @@ import { listApi, deleteApi } from "@/api/chargingstation";
 import { ElMessage } from "element-plus";
 import StationForm from "@/components/StationForm/stationForm.vue";
 import type { RowType } from "@/types/station";
-import { useStationStore } from "@/store/station";
+
+// 移除store依赖，改为本地状态管理
 const select = ref("name");
 const fromParams = reactive({
     input: "",
@@ -106,8 +107,18 @@ const totals = ref(0);
 const tableData = ref([]);
 const loading = ref<boolean>(false);
 const dialogVisible = ref<boolean>(false);
-const stationStore = useStationStore();
-const { setRowData } = stationStore;
+const currentRow = ref<Partial<RowType>>({
+    name: "",
+    id: "",
+    city: "",
+    fast: "",
+    slow: "",
+    status: 1,
+    now: "",
+    fault: "",
+    person: "",
+    tel: "",
+});
 const loadData = async () => {
     loading.value = true;
     const {
