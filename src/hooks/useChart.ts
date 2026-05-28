@@ -10,7 +10,6 @@ export  function useChart(chartRef:Ref<HTMLElement|null>,setChartData:any){
         const  options=await setChartData()
 
             chartInstance.value.setOption(options)
-
         }
     }
 

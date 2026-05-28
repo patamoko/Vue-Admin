@@ -18,12 +18,13 @@ export const useTabsStore=defineStore("tabs",()=>{
     const removeTab=(name:string)=>{
         //如果删除的是高亮的
         if(currentTab.value.name===name){
-            const currentIndex=tabs.value.findIndex(tab=>tab.name===name);/
+            const currentIndex=tabs.value.findIndex(tab=>tab.name===name);
             if(currentIndex!=0){
                 currentTab.value=tabs.value[currentIndex-1]
             }else{
                 return 
             }
+        
         }
 
         tabs.value=tabs.value.filter(tab=>tab.name!==name)

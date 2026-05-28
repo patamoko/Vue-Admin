@@ -1,5 +1,5 @@
-import {post} from "@/utils/http";
-import {get} from "@/utils/http";
+import {post} from "@/utils/http";//post请求
+import {get} from "@/utils/http";//get请求
 import {RowType}from"@/types/station";
 interface ListType{
     page:number,

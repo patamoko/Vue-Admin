@@ -15,7 +15,7 @@
                     </el-select>
                 </el-col>
                 <el-col :span="6">
-                    <el-input v-model="search.no" placeholder="设备编号" />
+                    <el-input v-model="search" placeholder="设备编号" />
                 </el-col>
                 <el-col :span="6">
                     <el-button type="primary" @click="loadData">查询</el-button>
@@ -74,7 +74,9 @@ import { useHttp } from '@/hooks/useHttp';
 import { currentListApi } from "@/api/chargingstation"
 import { batchDeleteApi } from "@/api/operation"
 import { ElMessage } from 'element-plus';
-
+import router from "@/router";
+import { useRoute } from 'vue-router';
+const route = useRoute();
 interface SearchType {
     orderNo: string;
     status: number;
@@ -139,8 +141,8 @@ const handleDelete = async () => {
         });
     }
 }
-const handleDetail = (row: SearchListType) => {//点击详情按钮
-    
+const  handleDetail = (row: SearchListType) => {//点击详情按钮
+    console.log(row)
 }
 const handle = async (row: SearchListType) => {
     try {
