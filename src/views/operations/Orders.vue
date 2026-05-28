@@ -138,8 +138,8 @@ const handleDelete = async () => {
         });
     }
 }
-const handleDetail = (row: SearchListType) => {//
-    console.log(row);
+const handleDetail = (row: SearchListType) => {//点击详情按钮
+    
 }
 const handle = async (row: SearchListType) => {
     try {
