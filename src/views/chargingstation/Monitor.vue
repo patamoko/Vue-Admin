@@ -92,8 +92,7 @@ import { listApi, deleteApi } from "@/api/chargingstation";
 import { ElMessage } from "element-plus";
 import StationForm from "@/components/StationForm/stationForm.vue";
 import type { RowType } from "@/types/station";
-
-// 移除store依赖，改为本地状态管理
+import { useStationStore } from "@/store/station";
 const select = ref("name");
 const fromParams = reactive({
     input: "",
@@ -107,18 +106,8 @@ const totals = ref(0);
 const tableData = ref([]);
 const loading = ref<boolean>(false);
 const dialogVisible = ref<boolean>(false);
-const currentRow = ref<Partial<RowType>>({
-    name: "",
-    id: "",
-    city: "",
-    fast: 0,
-    slow: 0,
-    status: 1,
-    now: 0,
-    fault: 0,
-    person: "",
-    tel: "",
-});
+const stationStore = useStationStore();
+const { setRowData } = stationStore;
 const loadData = async () => {
     loading.value = true;
     const {
@@ -147,7 +136,7 @@ const handleReset = () => {
     loadData();
 };
 const handleEdit = (row: RowType) => {//点击编辑按钮
-    Object.assign(currentRow.value, row);
+    setRowData(row);
     dialogVisible.value = true;
 };
 const handleDelete = async (row: RowType) => {
@@ -168,15 +157,15 @@ const handleDelete = async (row: RowType) => {
     }
 };
 const handleAdd = () => {
-    Object.assign(currentRow.value, {
+    setRowData({
         name: "",
         id: "",
         city: "",
-        fast: 0,
-        slow: 0,
+        fast: "",
+        slow: "",
         status: 1,
-        now: 0,
-        fault: 0,
+        now: "",
+        fault: "",
         person: "",
         tel: "",
     });
