@@ -19,7 +19,7 @@ onMounted(() => {
             zoom: 5,
             center: [116.397428, 39.90923],
         });
-        MapList().then(({data}) => {
+        currentListApi().then(({data}) => {
             console.log(data);
             markerList.value = data;
             markerList.value.forEach((markerItem: any) => {

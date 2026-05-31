@@ -69,14 +69,13 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref} from 'vue';
 import { useHttp } from '@/hooks/useHttp';
 import { currentListApi } from "@/api/chargingstation"
 import { batchDeleteApi } from "@/api/operation"
+import { useRouter } from 'vue-router';
+const router = useRouter()
 import { ElMessage } from 'element-plus';
-import router from "@/router";
-import { useRoute } from 'vue-router';
-const route = useRoute();
 interface SearchType {
     orderNo: string;
     status: number;
@@ -105,11 +104,11 @@ const search = ref<SearchType>({
     endDate: '',
 });
 const handleChange = (val: string[]) => {
-    search.value.startDate = val[0];
-    search.value.endDate = val[1];
+    search.value.startDate = val[0];//开始日期
+    search.value.endDate = val[1];//结束日期
 }
 const handleReset = () => {
-    date.value = []
+    date.value = [];
     search.value = {
         orderNo: '',
         status: 0,
@@ -124,7 +123,14 @@ const selectedList = ref<SearchListType[]>([])
 const handleSelectionChange = (val: SearchListType[]) => {
     selectedList.value = val
 }
-const handleDelete = async () => {
+const handleDelete = async () => {//
+    if (!selectedList.value.length) {
+        ElMessage({
+            message: "请选择要删除的订单",
+            type: "warning",
+        });
+        return
+    }
     try {
         const res = await batchDeleteApi(selectedList.value.map(item => item.orderNo));
         if (res.code) {
@@ -143,6 +149,7 @@ const handleDelete = async () => {
 }
 const  handleDetail = (row: SearchListType) => {//点击详情按钮
     console.log(row)
+    router.push({ name: "detail", params: { orderNo: row.orderNo } })
 }
 const handle = async (row: SearchListType) => {
     try {
