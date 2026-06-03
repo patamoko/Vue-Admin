@@ -1,5 +1,5 @@
 <template>
   <div>
-    详情详情
+    订单详情：{{ $route.params.orderNo }}
   </div>
 </template>

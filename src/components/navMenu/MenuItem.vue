@@ -32,8 +32,8 @@ export default defineComponent({
         const tabsStore=useTabsStore();
         const {addTab,setCurrentTab}=tabsStore;
         const add=(name:string,url:string,icon:string)=>{
-            addTab(name,url,icon);
-            setCurrentTab(name,url)
+            addTab(name, url, icon);
+            setCurrentTab(name, url);
         }
         return {add}
     }

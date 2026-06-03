@@ -34,7 +34,8 @@
         </el-card>
         <el-card class="mt">
             <el-button type="danger" :disabled="!selectedList.length" @click="handleDelete">批量删除</el-button>
-            <el-button type="primary" icon="Download" :disabled="!selectedList.length">导出订单到Excel</el-button>
+            <el-button type="primary" icon="Download" :disabled="!selectedList.length"
+                @click="exportExcel">导出订单到Excel</el-button>
         </el-card>
         <el-card class="mt">
             <el-table :data="dataList" style="width: 100%" v-loading="loading"
@@ -69,13 +70,20 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref} from 'vue';
-import { useHttp } from '@/hooks/useHttp';
-import { currentListApi } from "@/api/chargingstation"
-import { batchDeleteApi } from "@/api/operation"
-import { useRouter } from 'vue-router';
-const router = useRouter()
-import { ElMessage } from 'element-plus';
+import { ref, watch } from "vue";
+import { useHttp } from "@/hooks/useHttp";
+import { currentListApi } from "@/api/chargingstation";
+import { batchDeleteApi } from "@/api/operation";
+import { useTabsStore } from "@/store/tabs";
+import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
+import { ElMessage } from "element-plus";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+const route = useRoute();
+const router = useRouter();
+const tabsStore = useTabsStore();
+const { addTab, setCurrentTab } = tabsStore;
 interface SearchType {
     orderNo: string;
     status: number;
@@ -96,43 +104,46 @@ interface SearchListType {
 }
 const date = ref([]);
 const search = ref<SearchType>({
-    orderNo: '',
+    orderNo: "",
     status: 0,
-    no: '',
-    name: '',
-    startDate: '',
-    endDate: '',
+    no: "",
+    name: "",
+    startDate: "",
+    endDate: "",
 });
 const handleChange = (val: string[]) => {
-    search.value.startDate = val[0];//开始日期
-    search.value.endDate = val[1];//结束日期
-}
+    search.value.startDate = val[0]; //开始日期
+    search.value.endDate = val[1]; //结束日期
+};
 const handleReset = () => {
     date.value = [];
     search.value = {
-        orderNo: '',
+        orderNo: "",
         status: 0,
-        no: '',
-        name: '',
-        startDate: '',
-        endDate: '',
-    }
-    resetPagination()
-}
-const selectedList = ref<SearchListType[]>([])
+        no: "",
+        name: "",
+        startDate: "",
+        endDate: "",
+    };
+    resetPagination();
+};
+const selectedList = ref<SearchListType[]>([]);
 const handleSelectionChange = (val: SearchListType[]) => {
-    selectedList.value = val
-}
-const handleDelete = async () => {//
+    selectedList.value = val;
+};
+const handleDelete = async () => {
+    //
     if (!selectedList.value.length) {
         ElMessage({
             message: "请选择要删除的订单",
             type: "warning",
         });
-        return
+        return;
     }
     try {
-        const res = await batchDeleteApi(selectedList.value.map(item => item.orderNo));
+        const res = await batchDeleteApi(
+            selectedList.value.map((item) => item.orderNo)
+        );
         if (res.code) {
             ElMessage({
                 message: res.data,
@@ -146,11 +157,39 @@ const handleDelete = async () => {//
             type: "error",
         });
     }
-}
-const  handleDetail = (row: SearchListType) => {//点击详情按钮
-    console.log(row)
-    router.push({ name: "detail", params: { orderNo: row.orderNo } })
-}
+};
+const handleDetail = (row: SearchListType) => {
+    //点击详情按钮
+    console.log(row);
+
+    addTab(
+        `订单详情-${row.orderNo}`,
+        `/operations/detail/${row.orderNo}`,
+        "Share"
+    );
+
+    setCurrentTab(`订单详情-${row.orderNo}`, `/operations/detail/${row.orderNo}`);
+
+    // 4. 跳转到详情页面
+    router.push({ name: "detail", params: { orderNo: row.orderNo } });
+};
+watch(
+    () => route.name,
+    (to, from) => {
+        if (to === "orders" && from !== "detail")
+            //当路由变化为订单列表时，重新加载数据
+
+            loadData();
+    }
+);
+const exportExcel = () => {
+    const ws = XLSX.utils.json_to_sheet(dataList.value);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    const wbout=XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([wbout], { type: "application/octet-stream" });
+    saveAs(blob, "导入的数据.xlsx");
+};
 const handle = async (row: SearchListType) => {
     try {
         const res = await batchDeleteApi([row.orderNo]);
@@ -167,13 +206,15 @@ const handle = async (row: SearchListType) => {
             type: "error",
         });
     }
-}
-const { dataList,
+};
+const {
+    dataList,
     loading,
     totals,
     pageInfo,
     loadData,
     handleSizeChange,
     handleCurrentChange,
-    resetPagination } = useHttp<SearchListType>("/orderList", search.value)
+    resetPagination,
+} = useHttp<SearchListType>("/orderList", search.value);
 </script>

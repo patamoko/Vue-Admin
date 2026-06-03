@@ -69,6 +69,6 @@ const remove = (TabPaneName: string) => {
 </script>
 <style lang="less" scoped>
     .demo-tabs{
-      ::v-deep .is-active{background-color: rgb(34, 136, 255) !important; color: #fff !important;}
+    ::v-deep .is-active{background-color: rgb(34, 136, 255) !important; color: #fff !important;}
     }
 </style>
