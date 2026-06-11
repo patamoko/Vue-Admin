@@ -1,22 +1,15 @@
-import { post, get } from "@/utils/http";
-
-interface BatchDeleteParams {
-  order: string[];
+import {post,get} from "@/utils/http";
+enum Api{
+    BatchDelete="/batchDelete",
+    CityList="/cityList"
 }
 
-enum Api {
-  BatchDelete = "/batchDelete",
-  CityList = "/cityList"
+function batchDeleteApi(order:string[]){
+    return post(Api.BatchDelete,{order})
 }
 
-export function batchDeleteApi(order: string[]) {
-  return post(Api.BatchDelete, { order } as BatchDeleteParams);
+function cityListApi(){
+    return get(Api.CityList)
 }
 
-export function cityListApi() {
-  return get(Api.CityList);
-}
-
-export type {
-  BatchDeleteParams
-}
+export {batchDeleteApi,cityListApi}

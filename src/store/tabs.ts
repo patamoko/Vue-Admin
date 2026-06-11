@@ -6,7 +6,7 @@ export const useTabsStore=defineStore("tabs",()=>{
     const currentTab=ref<{name:string,url:string}>({name:"",url:""})
 
     const addTab=(name:string,url:string,icon:string)=>{
-        if(!tabs.value.some((tab)=>tab.url===url)){
+        if(!tabs.value.some((tab)=>tab.url===url)){z
             tabs.value.push({name,url,icon})
         }
     }

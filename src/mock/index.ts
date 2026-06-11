@@ -167,7 +167,7 @@ Mock.mock("https://www.demo.com/login","post",(options:any)=>{
             data:{
                 token:"admintokenkkljbuo2w9xla2",
                 user:{
-                    username:"晴晴",
+                    username:"晴晴大宝贝",
                     roles:["admin"],
                 },
                 menulist
@@ -180,7 +180,7 @@ Mock.mock("https://www.demo.com/login","post",(options:any)=>{
             data:{
                 token:"usertokenkkljbuo2w9xla2",
                 user:{
-                    username:"面包",
+                    username:"面包包",
                     roles:["user"]
                 },
                 menulist:menulist2

@@ -45,9 +45,7 @@ const userStore = useUserStore();
 const router = useRouter();
 const handleLogin = () => {
     formRef.value?.validate(async (valid: boolean) => {
-        //?. 可选链操作符   obj?obj.name:"" obj?.name
         if (valid) {
-            //校验通过
             await userStore.login(ruleForm);
             router.push("/");
         }

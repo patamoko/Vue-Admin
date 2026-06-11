@@ -162,15 +162,14 @@ const handleDetail = (row: SearchListType) => {
     //点击详情按钮
     console.log(row);
 
-    addTab(
-        `订单详情-${row.orderNo}`,
-        `/operations/detail/${row.orderNo}`,
-        "Share"
-    );
+    // 固定标签页名称和URL，实现覆盖效果
+    const tabName = "订单详情";
+    const tabUrl = `/operations/detail/${row.orderNo}`;
 
-    setCurrentTab(`订单详情-${row.orderNo}`, `/operations/detail/${row.orderNo}`);
+    addTab(tabName, tabUrl, "Share");
+    setCurrentTab(tabName, tabUrl);
 
-    // 4. 跳转到详情页面
+    // 跳转到详情页面
     router.push({ name: "detail", params: { orderNo: row.orderNo } });
 };
 watch(
@@ -186,7 +185,7 @@ const exportExcel = () => {
     const ws = XLSX.utils.json_to_sheet(dataList.value);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-    const wbout=XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
     const blob = new Blob([wbout], { type: "application/octet-stream" });
     saveAs(blob, "导入的数据.xlsx");
 };
