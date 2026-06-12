@@ -22,7 +22,7 @@
 | Pinia | latest | 状态管理 |
 | Vue Router | 4.x | 路由管理 |
 | Axios | latest | HTTP 客户端 |
-
+| Mapbox GL JS | latest | 地图可视化 |
 | ECharts | 5.x | 数据可视化 |
 | Less | latest | CSS 预处理器 |
 
