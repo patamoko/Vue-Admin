@@ -7,6 +7,7 @@
 ![Vite](https://img.shields.io/badge/Vite-4.4+-purple)
 ![Element Plus](https://img.shields.io/badge/Element%20Plus-latest-orange)
 
+
 ## 📋 项目概述
 
 本项目是一个功能完善的充电站管理后台系统，涵盖充电站监控、故障管理、营收统计、订单管理等核心业务模块。采用现代化的前端技术栈，实现了组件化开发、类型安全、状态管理等企业级开发规范。
