@@ -166,7 +166,7 @@ const initChart = () => {
   if (!chartDom) return;
 
   chartInstance = echarts.init(chartDom);
-}
+
   const option = {
     tooltip: {
       trigger: "axis",

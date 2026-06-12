@@ -3,31 +3,21 @@
         <!-- 侧边栏 - 对话历史 -->
         <div class="chat-sidebar" :class="{ collapsed: sidebarCollapsed }">
             <div class="sidebar-header">
-                <el-button
-                    type="primary"
-                    class="new-chat-btn"
-                    @click="startNewChat"
-                >
-                    <el-icon><Plus /></el-icon>
+                <el-button type="primary" class="new-chat-btn" @click="startNewChat">
+                    <el-icon>
+                        <Plus />
+                    </el-icon>
                     <span v-if="!sidebarCollapsed">新建对话</span>
                 </el-button>
-                <el-button
-                    :icon="sidebarCollapsed ? Expand : Fold"
-                    circle
-                    size="small"
-                    class="toggle-btn"
-                    @click="sidebarCollapsed = !sidebarCollapsed"
-                />
+                <el-button :icon="sidebarCollapsed ? Expand : Fold" circle size="small" class="toggle-btn"
+                    @click="sidebarCollapsed = !sidebarCollapsed" />
             </div>
             <div class="conversation-list" v-if="!sidebarCollapsed">
-                <div
-                    v-for="conv in conversations"
-                    :key="conv.id"
-                    class="conv-item"
-                    :class="{ active: conv.id === currentConversationId }"
-                    @click="switchConversation(conv.id)"
-                >
-                    <el-icon><ChatDotRound /></el-icon>
+                <div v-for="conv in conversations" :key="conv.id" class="conv-item"
+                    :class="{ active: conv.id === currentConversationId }" @click="switchConversation(conv.id)">
+                    <el-icon>
+                        <ChatDotRound />
+                    </el-icon>
                     <span class="conv-title">{{ conv.title }}</span>
                     <el-icon class="delete-conv" @click.stop="deleteConversation(conv.id)">
                         <Delete />
@@ -44,11 +34,7 @@
             <!-- 顶部栏 -->
             <div class="chat-topbar">
                 <div class="topbar-left">
-                    <el-icon
-                        :size="22"
-                        class="model-icon"
-                        :style="{ color: 'var(--chat-primary, #4f6ef7)' }"
-                    >
+                    <el-icon :size="22" class="model-icon" :style="{ color: 'var(--chat-primary, #4f6ef7)' }">
                         <Cpu />
                     </el-icon>
                     <span class="model-name">AI 智能助手</span>
@@ -56,7 +42,9 @@
                 </div>
                 <div class="topbar-right">
                     <el-button circle size="small" @click="clearCurrentChat">
-                        <el-icon><Delete /></el-icon>
+                        <el-icon>
+                            <Delete />
+                        </el-icon>
                     </el-button>
                 </div>
             </div>
@@ -66,18 +54,18 @@
                 <!-- 欢迎界面 -->
                 <div v-if="currentMessages.length === 0" class="welcome-area">
                     <div class="welcome-icon">
-                        <el-icon :size="60" color="#4f6ef7"><Cpu /></el-icon>
+                        <el-icon :size="60" color="#4f6ef7">
+                            <Cpu />
+                        </el-icon>
                     </div>
                     <h2>你好，我是 AI 智能助手</h2>
                     <p class="welcome-subtitle">可以帮你解答问题、编写代码、分析数据等</p>
                     <div class="suggestion-cards">
-                        <div
-                            v-for="sg in suggestions"
-                            :key="sg.title"
-                            class="suggestion-card"
-                            @click="sendMessage(sg.prompt)"
-                        >
-                            <el-icon :size="18"><component :is="sg.icon" /></el-icon>
+                        <div v-for="sg in suggestions" :key="sg.title" class="suggestion-card"
+                            @click="sendMessage(sg.prompt)">
+                            <el-icon :size="18">
+                                <component :is="sg.icon" />
+                            </el-icon>
                             <div class="sg-info">
                                 <span class="sg-title">{{ sg.title }}</span>
                                 <span class="sg-desc">{{ sg.desc }}</span>
@@ -87,25 +75,14 @@
                 </div>
 
                 <!-- 消息 -->
-                <div
-                    v-for="(msg, idx) in currentMessages"
-                    :key="idx"
-                    class="message-row"
-                    :class="msg.role"
-                >
+                <div v-for="(msg, idx) in currentMessages" :key="idx" class="message-row" :class="msg.role">
                     <div class="message-avatar">
-                        <el-avatar
-                            v-if="msg.role === 'user'"
-                            :size="36"
-                            icon="UserFilled"
-                            :style="{ backgroundColor: '#4f6ef7' }"
-                        />
-                        <el-avatar
-                            v-else
-                            :size="36"
-                            :style="{ backgroundColor: '#19c37d' }"
-                        >
-                            <el-icon :size="20"><Cpu /></el-icon>
+                        <el-avatar v-if="msg.role === 'user'" :size="36" icon="UserFilled"
+                            :style="{ backgroundColor: '#4f6ef7' }" />
+                        <el-avatar v-else :size="36" :style="{ backgroundColor: '#19c37d' }">
+                            <el-icon :size="20">
+                                <Cpu />
+                            </el-icon>
                         </el-avatar>
                     </div>
                     <div class="message-content">
@@ -121,20 +98,16 @@
                         </div>
                         <div class="message-time">{{ msg.time }}</div>
                         <div v-if="msg.role === 'assistant' && !msg.typing" class="message-actions">
-                            <el-button
-                                link
-                                size="small"
-                                @click="copyMessage(msg.content)"
-                            >
-                                <el-icon><CopyDocument /></el-icon>
+                            <el-button link size="small" @click="copyMessage(msg.content)">
+                                <el-icon>
+                                    <CopyDocument />
+                                </el-icon>
                                 复制
                             </el-button>
-                            <el-button
-                                link
-                                size="small"
-                                @click="regenerateMessage(idx)"
-                            >
-                                <el-icon><Refresh /></el-icon>
+                            <el-button link size="small" @click="regenerateMessage(idx)">
+                                <el-icon>
+                                    <Refresh />
+                                </el-icon>
                                 重新生成
                             </el-button>
                         </div>
@@ -145,26 +118,12 @@
             <!-- 输入区域 -->
             <div class="chat-input-area">
                 <div class="input-wrapper">
-                    <el-input
-                        v-model="inputText"
-                        type="textarea"
-                        :rows="1"
-                        :autosize="{ minRows: 1, maxRows: 5 }"
-                        placeholder="输入消息，Enter 发送，Shift+Enter 换行"
-                        class="chat-input"
-                        @keydown.enter.exact="handleEnter"
-                        :disabled="loading"
-                        resize="none"
-                    />
+                    <el-input v-model="inputText" type="textarea" :rows="1" :autosize="{ minRows: 1, maxRows: 5 }"
+                        placeholder="输入消息，Enter 发送，Shift+Enter 换行" class="chat-input" @keydown.enter.exact="handleEnter"
+                        :disabled="loading" resize="none" />
                     <div class="input-actions">
-                        <el-button
-                            type="primary"
-                            :icon="Promotion"
-                            circle
-                            class="send-btn"
-                            :disabled="!inputText.trim() || loading"
-                            @click="sendMessage(inputText)"
-                        />
+                        <el-button type="primary" :icon="Promotion" circle class="send-btn"
+                            :disabled="!inputText.trim() || loading" @click="sendMessage(inputText)" />
                     </div>
                 </div>
                 <p class="input-hint">AI 助手可能会产生不准确的信息，请注意甄别。</p>
@@ -228,6 +187,7 @@ function getTimeStr(): string {
 
 // 创建新对话
 function startNewChat() {
+    sidebarCollapsed.value = false
     const newConv: Conversation = {
         id: Date.now(),
         title: '新的对话',
@@ -434,10 +394,13 @@ if (conversations.value.length === 0) {
 .chat-sidebar {
     width: 280px;
     min-width: 60px;
-    background: #1e1e2f;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
     transition: width 0.25s ease;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
 
     &.collapsed {
         width: 60px;
@@ -451,28 +414,29 @@ if (conversations.value.length === 0) {
 
         .new-chat-btn {
             flex: 1;
-            background: #4f6ef7;
-            border-color: #4f6ef7;
+            background: #fff;
+            color: #333;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
             font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
 
             &:hover {
-                background: #5c7bf7;
-                border-color: #5c7bf7;
+                background: #f5f5f5;
+                border-color: #ccc;
             }
         }
 
         .toggle-btn {
-            color: #999;
+            color: #666;
             background: transparent;
-            border-color: #444;
+            border-color: transparent;
             flex-shrink: 0;
 
             &:hover {
-                color: #fff;
-                border-color: #666;
+                color: #333;
+                background: rgba(0, 0, 0, 0.04);
             }
         }
     }
@@ -490,13 +454,13 @@ if (conversations.value.length === 0) {
             margin-bottom: 4px;
             border-radius: 8px;
             cursor: pointer;
-            color: #b0b0c0;
+            color: #555;
             font-size: 14px;
             transition: all 0.15s;
 
             &:hover {
-                background: #2a2a3d;
-                color: #e0e0f0;
+                background: rgba(0, 0, 0, 0.04);
+                color: #333;
 
                 .delete-conv {
                     opacity: 1;
@@ -504,7 +468,7 @@ if (conversations.value.length === 0) {
             }
 
             &.active {
-                background: #2a2a3d;
+                background: rgba(79, 110, 247, 0.08);
                 color: #4f6ef7;
             }
 
@@ -528,7 +492,7 @@ if (conversations.value.length === 0) {
 
         .empty-conv {
             text-align: center;
-            color: #666;
+            color: #999;
             font-size: 13px;
             padding: 40px 0;
         }
@@ -791,17 +755,29 @@ if (conversations.value.length === 0) {
         background: #bbb;
         animation: typingBounce 1.4s infinite ease-in-out both;
 
-        &:nth-child(1) { animation-delay: -0.32s; }
-        &:nth-child(2) { animation-delay: -0.16s; }
-        &:nth-child(3) { animation-delay: 0s; }
+        &:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        &:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        &:nth-child(3) {
+            animation-delay: 0s;
+        }
     }
 }
 
 @keyframes typingBounce {
-    0%, 80%, 100% {
+
+    0%,
+    80%,
+    100% {
         transform: scale(0.6);
         opacity: 0.4;
     }
+
     40% {
         transform: scale(1);
         opacity: 1;
