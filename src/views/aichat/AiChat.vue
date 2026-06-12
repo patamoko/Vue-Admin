@@ -413,16 +413,15 @@ if (conversations.value.length === 0) {
 </script>
 
 <style lang="less" scoped>
-// CSS 变量
---chat-primary: #4f6ef7;
---chat-bg: #f8f9fb;
---chat-sidebar-bg: #1e1e2f;
---chat-sidebar-hover: #2a2a3d;
---chat-user-bubble: #4f6ef7;
---chat-ai-bubble: #ffffff;
---chat-border: #e8eaed;
-
 .chat-container {
+    // CSS 变量
+    --chat-primary: #4f6ef7;
+    --chat-bg: #f8f9fb;
+    --chat-sidebar-bg: #1e1e2f;
+    --chat-sidebar-hover: #2a2a3d;
+    --chat-user-bubble: #4f6ef7;
+    --chat-ai-bubble: #ffffff;
+    --chat-border: #e8eaed;
     display: flex;
     height: calc(100vh - 140px);
     background: #f0f2f5;
@@ -872,5 +871,6 @@ if (conversations.value.length === 0) {
         color: #bbb;
         margin-top: 8px;
     }
+}
 }
 </style>
