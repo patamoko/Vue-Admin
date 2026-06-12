@@ -6,6 +6,8 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue)
 ![Vite](https://img.shields.io/badge/Vite-4.4+-purple)
 ![Element Plus](https://img.shields.io/badge/Element%20Plus-latest-orange)
+![Pinia](https://img.shields.io/badge/Pinia-latest-green)
+
 
 
 ## 📋 项目概述
