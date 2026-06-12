@@ -872,5 +872,4 @@ if (conversations.value.length === 0) {
         margin-top: 8px;
     }
 }
-}
 </style>
