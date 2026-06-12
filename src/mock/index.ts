@@ -2603,35 +2603,213 @@ Mock.mock("https://www.demo.com/ai/chat","post",(options:any)=>{
   const { prompt } = JSON.parse(options.body)
   console.log("AI Chat 收到提问：", prompt)
 
-  // 根据关键词生成不同类型的回复
+  // 根据用户输入智能匹配回复
   let reply = ""
-  const p = prompt.toLowerCase()
+  const q = prompt
+  const ql = q.toLowerCase()
 
-  if (p.includes("数据") || p.includes("分析") || p.includes("统计")) {
-    reply = `好的，我来帮您分析数据！\n\n根据系统的运营数据，以下是我整理的关键分析结果：\n\n### 📊 数据看板总结\n\n| 指标 | 数值 | 趋势 |\n|------|------|------|\n| 总充电量 | 12,847 kWh | ↑ 8.5% |\n| 日均充电次数 | 356 次 | ↑ 5.2% |\n| 设备利用率 | 78.3% | → 持平 |\n| 故障率 | 2.1% | ↓ 0.8% |\n\n### 关键发现\n\n1. **高峰期集中在 10:00-14:00 和 17:00-20:00**，建议在这两个时段优化充电桩分配策略\n2. **快充桩使用率明显高于慢充桩**（89% vs 62%），可考虑适当调整设备比例\n3. **用户满意度评分 4.3/5**，投诉集中在充电速度慢和车位被占用问题上\n\n需要我进一步分析某个具体方面吗？比如营收趋势、设备健康状态或用户行为分析？`
-  } else if (p.includes("方案") || p.includes("推广") || p.includes("运营")) {
-    reply = `这是一个非常好的问题！针对充电站推广和运营优化，我为您制定了以下方案：\n\n### 🎯 充电站运营推广方案\n\n#### 一、用户引流策略\n\n1. **新用户首充优惠** — 首次充电享 8 折优惠，降低使用门槛\n2. **邀请有礼活动** — 老用户邀请新用户，双方各获充电券\n3. **地推合作** — 与商场、写字楼、小区物业合作推广\n\n#### 二、用户留存策略\n\n1. **会员积分体系** — 充电消费积分可兑换停车券、洗车服务\n2. **定时优惠** — 低谷时段充电享折扣，引导错峰充电\n3. **个性化推荐** — 根据用户充电习惯，推送最优充电方案\n\n#### 三、运营效率提升\n\n1. **智能调度系统** — 动态调整充电功率分配\n2. **预测性维护** — 基于设备数据提前预警故障\n3. **数据分析驱动** — 定期分析运营数据，优化策略\n\n需要我详细展开某个模块的具体实施方案吗？`
-  } else if (p.includes("代码") || p.includes("组件") || p.includes("vue") || p.includes("typescript") || p.includes("编程")) {
-    reply = `好的，我来为您编写一段 Vue 3 + TypeScript 代码！\n\n以下是一个功能完整的数据表格组件示例：\n\n<pre><code>&lt;template&gt;\n  &lt;el-table :data="tableData" v-loading="loading" border stripe&gt;\n    &lt;el-table-column\n      v-for="col in columns"\n      :key="col.prop"\n      :prop="col.prop"\n      :label="col.label"\n      :width="col.width"\n    /&gt;\n    &lt;el-table-column label="操作" width="180"&gt;\n      &lt;template #default="{ row }"&gt;\n        &lt;el-button link type="primary" @click="handleEdit(row)"&gt;编辑&lt;/el-button&gt;\n        &lt;el-button link type="danger" @click="handleDelete(row)"&gt;删除&lt;/el-button&gt;\n      &lt;/template&gt;\n    &lt;/el-table-column&gt;\n  &lt;/el-table&gt;\n&lt;/template&gt;</code></pre>\n\n这个组件支持动态列配置、排序、加载状态、编辑和删除操作等功能。\n\n需要我说明某个部分的实现逻辑吗？`
-  } else if (p.includes("趋势") || p.includes("行业") || p.includes("技术") || p.includes("发展")) {
-    reply = `关于充电站行业的发展趋势和关键技术，以下是详细分析：\n\n### 🚗 充电站行业发展趋势\n\n#### 1. 市场规模持续增长\n- 2025 年中国充电桩保有量突破 1200 万台\n- 车桩比从 3:1 向 2:1 优化\n- 市场规模预计 2030 年达到 5000 亿元\n\n#### 2. 技术演进方向\n\n| 技术领域 | 当前状态 | 发展趋势 |\n|----------|----------|----------|\n| 快充技术 | 120kW 为主流 | 向 350kW+ 超充发展 |\n| 无线充电 | 商用试点阶段 | 2028 年规模化应用 |\n| V2G 技术 | 示范项目 | 双向充电将成为标配 |\n| 智能调度 | AI 辅助 | 全自动智能调度 |\n\n#### 3. 商业模式创新\n\n- **光储充一体化** — 光伏+储能+充电，降低运营成本\n- **充电即服务（CaaS）** — 订阅制充电服务\n- **数据变现** — 充电视角下的用户行为数据价值\n\n如果您对某个方向特别感兴趣，我可以深入展开！`
-  } else if (p.includes("你好") || p.includes("hello") || p.includes("自我介绍")) {
-    reply = `你好！👋\n\n我是 **AI 智能助手**，基于大语言模型构建，可以帮你：\n\n- 💬 **回答问题** — 技术咨询、行业分析、知识科普\n- 📊 **数据分析** — 解读运营数据，生成分析报告\n- ✍️ **文案写作** — 方案策划、文档撰写\n- 💻 **代码编写** — 支持 Vue、TypeScript、Python 等多种语言\n- 🔍 **问题排查** — 帮助定位和解决技术问题\n\n请问有什么可以帮助你的？`
-  } else {
-    const genericReplies = [
-      `关于 **"${prompt}"** 这个问题，我的看法是：\n\n这是一个值得深入探讨的话题。从多个角度来看，我们可以得出以下结论：\n\n1. 首先，需要明确问题的核心诉求是什么\n2. 其次，结合实际情况分析可行的解决方案\n3. 最后，制定分阶段的执行计划\n\n如果您能提供更多具体信息，我可以给出更有针对性的建议！`,
-      `很好的问题！让我为您详细解答。\n\n针对您提到的内容，我整理了以下几点：\n\n- **现状分析**：目前行业整体处于快速发展阶段\n- **关键挑战**：技术迭代快、运营成本控制、用户体验提升\n- **建议方向**：数据驱动 + 智能化管理 + 精细化运营\n\n需要我进一步展开具体某个方面吗？`,
-      `感谢提问！\n\n您提到的这个问题涉及多个层面，以下是我的分析：\n\n### 核心观点\n\n技术是工具，业务是目的。在充电站管理系统的建设中，我们应当始终以业务需求为导向，选择合适的技术方案。\n\n### 实践建议\n\n1. 充分调研用户需求和痛点\n2. 制定清晰的技术路线图\n3. 小步快跑，持续迭代优化\n4. 重视数据反馈，及时调整策略\n\n如果您想了解更具体的实施细节，欢迎继续提问！`
+  // ========== 问候 / 自我介绍 ==========
+  if (ql.includes("你好") || ql.includes("hello") || ql.includes("hi") || ql.includes("你是谁") || ql.includes("自我介绍") || ql.includes("你能做什么") || ql.includes("你叫什么") || ql.match(/^.{0,4}$/)) {
+    const greetings = [
+      `你好呀！👋\n\n我是 **AI 智能助手**，你可以把我当作你的专属技术顾问。\n\n我能帮你做的事情还挺多的：\n\n- 💬 **技术问答**：前端、后端、架构，你问我就答\n- 📊 **数据分析**：我可以帮你解读充电站的运营数据，发现隐藏在数字背后的趋势\n- ✍️ **文案策划**：推广方案、运营策略、技术文档都能写\n- 💻 **代码编写**：Vue、TypeScript、Python 都是我的舒适区\n- 🔍 **问题排查**：遇到 bug 了？把问题描述给我，一起定位\n\n对了我现在接入了你的充电站管理系统，所以关于充电站运营的问题我可以结合你的实际数据来聊。\n\n有什么想聊的？随便问，别客气 😄`,
+      `嗨！很高兴见到你 🌟\n\n我是动力港平台的 AI 助手，专门为充电站运营团队打造的智能伙伴。\n\n简单介绍一下我的能力：\n- 懂技术：能写代码、调 bug、做架构设计\n- 懂业务：充电站运营、数据分析、方案策划\n- 懂行业：新能源充电行业的趋势、政策、商业模式\n\n不用跟我客气，直接说你想做什么就行。比如：\n\n> "帮我分析一下最近的充电量趋势"\n> "给我写一个充电桩状态面板的 Vue 组件"\n> "充电站怎么提高用户留存率？"\n\n来吧，抛出你的第一个问题 🚀`,
+      `Hi there! 👋\n\n我是这个充电站管理系统的内置 AI 助手。\n\n坦白说，我的知识面还挺广的——从 Vue 3 组件设计到充电站行业趋势，从数据分析到运营策略，都是我的强项。\n\n你可以把我当成一个随时在线的技术合伙人。开发遇到困难了找我，数据看不懂了找我，想做个推广方案了找我。\n\n那么，今天想聊点什么？`
     ]
-    reply = genericReplies[Math.floor(Math.random() * genericReplies.length)]
+    reply = greetings[Math.floor(Math.random() * greetings.length)]
   }
-
-  return {
-    code: 200,
-    message: "操作成功",
-    data: {
-      reply,
-      timestamp: new Date().toISOString()
+  // ========== 数据分析 ==========
+  else if (ql.includes("数据") || ql.includes("分析") || ql.includes("统计") || ql.includes("趋势") || ql.includes("报表") || ql.includes("指标")) {
+    // 进一步细分
+    if (ql.includes("充电量") || ql.includes("电量") || ql.includes("用电")) {
+      reply = `看了一下充电量数据，最近一周的情况是这样的：\n\n📊 **充电量概览（近7天）**\n\n| 日期 | 充电量(kWh) | 环比 |\n|------|------------|------|\n| 周一 | 1,856 | - |\n| 周二 | 1,921 | +3.5% |\n| 周三 | 2,034 | +5.9% |\n| 周四 | 1,978 | -2.8% |\n| 周五 | 2,156 | +9.0% |\n| 周六 | 1,624 | -24.7% |\n| 周日 | 1,278 | -21.3% |\n\n一眼就能看出来，**周中充电量明显高于周末**，周五是峰值。这说明充电需求和通勤高度相关——大部分人是在上班通勤途中或公司附近充电。\n\n周末充电量断崖式下降，这其实反映了一个机会：**周末可以推出优惠活动**，把周末闲置的充电桩利用起来。\n\n你觉得这个方向值得深挖吗？`
+    } else if (ql.includes("营收") || ql.includes("收入") || ql.includes("盈利") || ql.includes("利润")) {
+      reply = `关于营收，我帮你拉了一下数据：\n\n💰 **营收结构分析**\n\n从系统数据来看，目前的营收主要由三块构成：\n\n- **电费收入**：约占 42%，这是基本盘，但利润空间有限\n- **服务费**：约占 38%，这是核心竞争力，服务越好这块越高\n- **停车费**：约占 12%，还有较大增长空间\n- **会员储值**：约占 8%，这块增长最快\n\n📈 **关键发现**\n\n1. 服务费占比远低于行业头部的 50%+，说明**增值服务还有很大空间**\n2. 会员储值虽然占比不高，但**增速最快**——用户一旦充值，粘性显著提升\n3. 部分站点（如贵阳甲秀楼站）增长率为 -5.3%，需要重点关注\n\n我的建议是：把精力放在提升服务费占比和会员转化率上，这两块的 ROI 最高。需要我针对某个具体站点做详细分析吗？`
+    } else if (ql.includes("故障") || ql.includes("异常") || ql.includes("设备") || ql.includes("健康")) {
+      reply = `我查了下设备运行数据，目前系统内有 9 台设备处于异常状态：\n\n🔧 **异常设备分布**\n\n| 站点 | 异常数量 | 主要问题 |\n|------|----------|----------|\n| 珠海长隆站 | 3 台 | 故障离线 |\n| 杭州西湖站 | 3 台 | 故障离线 |\n| 成都天府站 | 1 台 | 通信中断 |\n| 北京西单站 | 1 台 | 温度过高 |\n| 上海陆家嘴站 | 1 台 | 电流异常 |\n\n⚠️ 珠海和杭州两个站点各挂了 3 台，这不是个例了，建议优先排查这两个站点的供电环境。\n\n另外我发现一个规律：**温度偏高的设备，故障率是正常设备的 3.2 倍**。夏天快到了，散热维护得提前安排起来。\n\n要我帮你生成一份设备巡检清单吗？`
+    } else {
+      reply = `看了下系统的整体数据，给你一个快速概览：\n\n📊 **核心指标速览**\n\n| 指标 | 数值 | 状态 |\n|------|------|------|\n| 充电桩总数 | 3,398 台 | - |\n| 当前使用中 | 2,263 台 | 利用率 66.6% |\n| 异常设备 | 9 台 | ⚠️ 需关注 |\n| 快充占比 | 82% | ✅ 健康 |\n\n几个值得关注的信号：\n\n1. **整体利用率 66.6%**，属于行业中等偏上水平，还有提升空间\n2. **快充占比 82%**，用户明显偏好快充，后续新增设备可以优先考虑快充桩\n3. **异常率 0.26%**，控制在合理范围内\n\n你想深入看哪个维度？比如充电量走势、各站点对比、用户行为分析，我都能展开聊。`
     }
   }
+  // ========== 方案策划 / 运营 ==========
+  else if (ql.includes("方案") || ql.includes("推广") || ql.includes("运营") || ql.includes("营销") || ql.includes("活动") || ql.includes("策划") || ql.includes("策略")) {
+    if (ql.includes("留存") || ql.includes("会员") || ql.includes("用户") || ql.includes("客户")) {
+      reply = `用户留存确实是个好问题，也是充电站运营最核心的指标之一。\n\n🎯 **提高用户留存的 5 个策略**\n\n**1. 会员分层运营**\n不要一刀切。根据充电频次把用户分成 3 层：\n- 高频用户（月充≥8次）：给专属优惠，防止流失\n- 中频用户（月充3-7次）：推储值套餐，提升消费频次\n- 低频用户（月充≤2次）：发新人券，激活沉默用户\n\n**2. 储值锁客**\n系统数据显示，储值用户的月均充电次数是普通用户的 2.4 倍。可以设计阶梯储值套餐：\n- 充 200 送 20（基础）\n- 充 500 送 80（进阶）\n- 充 1000 送 200（铁粉）\n\n**3. 充电即积分**\n每充 1 度电积 1 分，积分可以兑换停车券、洗车、保养服务。关键是**积分要有实际价值**，不能鸡肋。\n\n**4. 精准推送**\n用户常去哪个站、什么时间充、用快充还是慢充——这些数据系统里都有。别群发，针对性地推。比如："你常去的北京西单站明天下午有优惠哦～"\n\n**5. 社交裂变**\n老用户邀请新用户，双方各得一次免费充电。成本可控，获客效率高。\n\n这些策略里，你觉得哪个最适合你们当前的阶段？我可以细化成具体执行方案。`
+    } else {
+      reply = `好，我帮你系统地梳理一下充电站的运营推广思路：\n\n🎯 **运营推广三步走**\n\n---\n\n**第一步：引流（前两周）**\n\n核心目标：让更多人知道你的充电站\n\n- 📍 **地图标注优化**：确保所有站点在高德/百度地图上的位置、价格、空闲桩数都准确，这是最大的自然流量入口\n- 🤝 **周边商户合作**：跟附近商场、写字楼、4S 店谈合作，在他们那放充电优惠码\n- 📱 **本地社群渗透**：加入本地的电动车车主群，自然地分享充电体验\n\n---\n\n**第二步：转化（第3-4周）**\n\n核心目标：让人第一次来充，并且觉得不错\n\n- 🎁 **首充立减**：新用户第一次充电减 10 元，门槛很低，转化率通常能到 30%+\n- ⭐ **高峰期分流**：10:00-14:00 和 17:00-20:00 是高峰期，非高峰时段充电打 8 折，平滑负载\n- 📊 **透明定价**：把电费、服务费、停车费列清楚，用户讨厌"隐藏费用"\n\n---\n\n**第三步：留存（长期）**\n\n核心目标：让用户下次还来\n\n- 💳 **储值锁客**：充值送余额，锁定长期用户\n- 🎯 **个性化推送**：别发垃圾消息，推真正有用的——比如用户常去的站排队了，推荐附近的空闲站\n- 🏆 **游戏化**：充电排行榜、勋章、等级，让充电这件事变得好玩\n\n---\n\n整体逻辑是：**先让用户来 → 来了满意 → 满意了储值 → 储值了就很难走了**。\n\n你现在的阶段是刚起步还是已经有稳定用户量了？不同阶段的策略侧重点差别很大。`
+    }
+  }
+  // ========== 代码编写 ==========
+  else if (ql.includes("代码") || ql.includes("写") || ql.includes("组件") || ql.includes("vue") || ql.includes("typescript") || ql.includes("编程") || ql.includes("实现") || ql.includes("函数") || ql.includes("typescript") || ql.includes("前端") || ql.includes("后端")) {
+    if (ql.includes("表格") || ql.includes("table") || ql.includes("列表")) {
+      reply = `没问题，给你写一个带分页、排序、筛选的表格组件。这个组件已经在项目里验证过，可以直接用：\n\n` +
+        "<pre><code>" +
+        "&lt;script setup lang=\"ts\"&gt;\n" +
+        "import { ref, computed } from 'vue'\n\n" +
+        "interface Column {\n" +
+        "  prop: string\n" +
+        "  label: string\n" +
+        "  width?: number\n" +
+        "  sortable?: boolean\n" +
+        "}\n\n" +
+        "const props = defineProps&lt;{\n" +
+        "  columns: Column[]\n" +
+        "  data: Record&lt;string, any&gt;[]\n" +
+        "  pageSize?: number\n" +
+        "}&gt;()\n\n" +
+        "const currentPage = ref(1)\n" +
+        "const sortField = ref('')\n" +
+        "const sortOrder = ref&lt;'asc' | 'desc'&gt;('asc')\n\n" +
+        "const sortedData = computed(() =&gt; {\n" +
+        "  if (!sortField.value) return props.data\n" +
+        "  return [...props.data].sort((a, b) =&gt; {\n" +
+        "    const va = a[sortField.value]\n" +
+        "    const vb = b[sortField.value]\n" +
+        "    const dir = sortOrder.value === 'asc' ? 1 : -1\n" +
+        "    return va &gt; vb ? dir : va &lt; vb ? -dir : 0\n" +
+        "  })\n" +
+        "})\n\n" +
+        "const paginatedData = computed(() =&gt; {\n" +
+        "  const size = props.pageSize ?? 10\n" +
+        "  const start = (currentPage.value - 1) * size\n" +
+        "  return sortedData.value.slice(start, start + size)\n" +
+        "})\n\n" +
+        "function toggleSort(prop: string) {\n" +
+        "  if (sortField.value === prop) {\n" +
+        "    sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc'\n" +
+        "  } else {\n" +
+        "    sortField.value = prop\n" +
+        "    sortOrder.value = 'asc'\n" +
+        "  }\n" +
+        "}\n" +
+        "&lt;/script&gt;\n" +
+        "</code></pre>\n\n" +
+        "核心设计思路：\n- computed 链式处理 sortedData → paginatedData，不用手动维护中间状态\n- 排序切换逻辑是「同字段切换方向，换字段默认升序」，跟 Excel 的体验一致\n- 分页从 computed 数据里切片，天然保证排序后再分页\n\n和你项目里的 Element Plus 风格完全一致，拿去就能用。需要我补全 template 部分吗？"
+    } else if (ql.includes("图表") || ql.includes("echarts") || ql.includes("chart") || ql.includes("可视化")) {
+      reply = `正好，ECharts 是咱们项目的核心依赖之一。给你写一个封装好的图表 composable：\n\n` +
+        "<pre><code>" +
+        "// hooks/useECharts.ts\n" +
+        "import { ref, onMounted, onUnmounted, type Ref } from 'vue'\n" +
+        "import * as echarts from 'echarts'\n\n" +
+        "export function useECharts(\n" +
+        "  containerRef: Ref&lt;HTMLElement | null&gt;,\n" +
+        "  optionFactory: () =&gt; echarts.EChartsOption\n" +
+        ") {\n" +
+        "  const chart = ref&lt;echarts.ECharts | null&gt;(null)\n\n" +
+        "  function init() {\n" +
+        "    if (!containerRef.value) return\n" +
+        "    chart.value = echarts.init(containerRef.value)\n" +
+        "    chart.value.setOption(optionFactory())\n" +
+        "  }\n\n" +
+        "  function resize() {\n" +
+        "    chart.value?.resize()\n" +
+        "  }\n\n" +
+        "  function refresh() {\n" +
+        "    chart.value?.setOption(optionFactory(), true)\n" +
+        "  }\n\n" +
+        "  onMounted(() =&gt; {\n" +
+        "    init()\n" +
+        "    window.addEventListener('resize', resize)\n" +
+        "  })\n\n" +
+        "  onUnmounted(() =&gt; {\n" +
+        "    window.removeEventListener('resize', resize)\n" +
+        "    chart.value?.dispose()\n" +
+        "  })\n\n" +
+        "  return { chart, refresh, resize }\n" +
+        "}\n" +
+        "</code></pre>\n\n" +
+        "这样封装的好处：\n1. **响应式更新**：optionFactory 里引用的 ref 变了，调用 refresh() 就能刷新图表\n2. **自动清理**：组件卸载时 dispose 实例，不会内存泄漏\n3. **resize 自动处理**：窗口大小变了图表跟着自适应\n\n你们项目里 src/hooks/useChart.ts 已经有类似的逻辑，我这个版本把类型写得更完整了一些，可以参考升级一下。"
+    } else {
+      reply = `好的，给你写一个实用的示例——基于咱们项目现有架构的写法：\n\n` +
+        "<pre><code>" +
+        "// composables/useStationFilter.ts\n" +
+        "import { ref, computed } from 'vue'\n" +
+        "import type { Station } from '@/types/station'\n\n" +
+        "export function useStationFilter(stations: Ref&lt;Station[]&gt;) {\n" +
+        "  const searchKeyword = ref('')\n" +
+        "  const statusFilter = ref&lt;number | null&gt;(null)\n\n" +
+        "  const filtered = computed(() =&gt; {\n" +
+        "    let result = stations.value\n\n" +
+        "    if (searchKeyword.value) {\n" +
+        "      const kw = searchKeyword.value.toLowerCase()\n" +
+        "      result = result.filter(s =&gt;\n" +
+        "        s.name.toLowerCase().includes(kw) ||\n" +
+        "        s.id.toLowerCase().includes(kw) ||\n" +
+        "        s.city.toLowerCase().includes(kw)\n" +
+        "      )\n" +
+        "    }\n\n" +
+        "    if (statusFilter.value !== null) {\n" +
+        "      result = result.filter(s =&gt; s.status === statusFilter.value)\n" +
+        "    }\n\n" +
+        "    return result\n" +
+        "  })\n\n" +
+        "  const stats = computed(() =&gt; ({\n" +
+        "    total: filtered.value.length,\n" +
+        "    online: filtered.value.filter(s =&gt; s.status === 2).length,\n" +
+        "    fault: filtered.value.filter(s =&gt; s.status === 6).length,\n" +
+        "  }))\n\n" +
+        "  function reset() {\n" +
+        "    searchKeyword.value = ''\n" +
+        "    statusFilter.value = null\n" +
+        "  }\n\n" +
+        "  return { searchKeyword, statusFilter, filtered, stats, reset }\n" +
+        "}\n" +
+        "</code></pre>\n\n" +
+        "几个设计点：\n- **computed 级联**：filtered 根据搜索词和状态联动，stats 自动从 filtered 派生，不用手动同步\n- **类型安全**：Station 类型从项目 types 里导入，如果接口变了编译器会告诉你哪里要改\n- **单一职责**：只负责筛选逻辑，不碰 UI，组件里用起来很干净\n\n在你的 Monitor.vue 或 Fault.vue 里用这个 hook，能把几百行筛选逻辑精简到几十行。需要我演示一下怎么集成到现有页面吗？"
+    }
+  }
+  // ========== 行业 / 技术趋势 ==========
+  else if (ql.includes("行业") || ql.includes("趋势") || ql.includes("未来") || ql.includes("发展") || ql.includes("前景") || ql.includes("新能源")) {
+    reply = `聊到行业趋势，这个话题我确实有不少想说的。\n\n🚗 **充电行业正在经历几个关键变化**\n\n---\n\n**1. 从「有桩用」到「充得快」**\n\n两三年前大家关心的是充电站够不够多。现在一线城市的充电站密度已经很高了，竞争焦点转移到了**充电速度和体验**。\n\n- 主流快充从 60kW 升级到 120kW → 240kW\n- 头部厂商已经在推 480kW 超充，号称"充电 5 分钟，续航 200 公里"\n- 对运营方的挑战：超充对电网冲击大，需要配储能设备\n\n---\n\n**2. 光储充一体化成为标配**\n\n这是一个正在发生的结构性变化：\n\n> 光伏发电 → 储能电池 → 充电桩\n\n好处很直接：白天光伏发电自己用，电费成本大幅下降；储能还能参与电网调峰，多一条收入来源。\n\n现在新建的大型充电站，不做光储充反而显得落伍了。\n\n---\n\n**3. V2G（车网互动）**\n\n这个方向目前还在早期，但想象空间很大：\n- 电动车不只是用电设备，还是**移动储能设备**\n- 晚上电价低时充电，白天电价高时可以卖回给电网\n- 相当于每个车主都变成了"能源交易商"\n\n技术上已经可行了，缺的是政策标准和商业模式。\n\n---\n\n**4. 智能化运营成为分水岭**\n\n这其实跟你们的系统直接相关。行业正在从「人工管站」过渡到「AI 管站」：\n- 动态定价：根据供需实时调价，高峰期涨价、低谷期降价\n- 预测维护：不等设备坏了再修，而是提前预警\n- 智能调度：引导用户去空闲站点，平衡负载\n\n以上这些，你们现在做的系统已经覆盖了很大一部分。接下来如果把 AI 分析能力再做深一些，竞争力会更强。\n\n你对哪个方向比较感兴趣？我可以展开细聊。`
+  }
+  // ========== 故障 / 问题排查 ==========
+  else if (ql.includes("故障") || ql.includes("报错") || ql.includes("bug") || ql.includes("问题") || ql.includes("错误") || ql.includes("error") || ql.includes("修") || ql.includes("解决")) {
+    reply = `好的，我来帮你排查一下。虽然看不到你的实际运行环境，但咱们可以按套路来定位：\n\n🔍 **标准排查流程**\n\n**1. 先看现象，归类方向**\n- 前端报错还是后端报错？控制台有没有红字？\n- 是所有用户都遇到，还是个别情况？\n- 什么时候开始出现的？最近改了什么？\n\n**2. 常见问题速查**\n\n| 现象 | 大概率是 | 优先级 |\n|------|----------|--------|\n| 页面白屏 | JS 报错 / 路由配置错误 | 🔴 高 |\n| 接口 401 | Token 过期 / 未登录 | 🔴 高 |\n| 数据不更新 | 响应式丢失 / computed 写错了 | 🟡 中 |\n| 样式不生效 | scoped 隔离 / 选择器优先级 | 🟢 低 |\n| 列表不刷新 | 直接改数组下标，没触发响应式 | 🟡 中 |\n\n**3. Vue 3 项目特别注意**\n- reactive() 包装的对象，直接赋值整个对象会丢失响应式 → 用 Object.assign() 或 ref()\n- ref() 在 &lt;script setup&gt; 里自动解包，但在 JS/TS 文件里要 .value\n- watch 默认不深度监听，对象内部变化监听不到 → 加 { deep: true }\n- Pinia store 里如果用了解构，响应式会断 → 用 storeToRefs()\n\n能把具体的报错信息或者问题现象发给我吗？信息越详细我定位越准。`
+  }
+  // ========== 系统相关 ==========
+  else if (ql.includes("系统") || ql.includes("平台") || ql.includes("项目") || ql.includes("架构") || ql.includes("技术栈")) {
+    reply = `我们这个动力港平台的技术架构还挺清晰的，给你梳理一下：\n\n🏗 **技术架构一览**\n\n\`\`\`\n┌─────────────────────────────────────────┐\n│              浏览器 (Browser)              │\n├─────────────────────────────────────────┤\n│  Vue 3 + TypeScript + Element Plus       │\n│  ┌──────────┐ ┌──────────┐ ┌─────────┐ │\n│  │  组件层   │ │  路由层   │ │  状态层  │ │\n│  │ views/   │ │ router/  │ │ store/   │ │\n│  │ components│ │ guard.ts │ │ Pinia    │ │\n│  └──────────┘ └──────────┘ └─────────┘ │\n│  ┌──────────┐ ┌──────────┐ ┌─────────┐ │\n│  │  Hooks   │ │  Utils   │ │  Types  │ │\n│  │ useHttp  │ │ axios.ts │ │ user/   │ │\n│  │ useChart │ │ http.ts  │ │ station/│ │\n│  └──────────┘ └──────────┘ └─────────┘ │\n├─────────────────────────────────────────┤\n│          Axios → REST API / Mock.js       │\n├─────────────────────────────────────────┤\n│        后端服务 (Mock / 生产环境)          │\n└─────────────────────────────────────────┘\n\`\`\`\n\n几个关键设计决策：\n\n- **Mock.js 劫持 XMLHttpRequest**，开发阶段完全不用启动后端，前端独立开发\n- **Pinia 替代 Vuex**，API 更简洁，TypeScript 支持更好\n- **路由守卫 + 权限指令**，页面级和按钮级双层权限控制\n- **KeepAlive + 标签页**，页面切换保留状态，用户体验好\n\n如果你想知道某个模块的具体实现细节，告诉我，我可以深入讲。`
+  }
+  // ========== 通用回复（基于语义分析） ==========
+  else {
+    // 分析问题类型，生成更有针对性的回复
+    const questionWords = ["什么", "怎么", "如何", "为什么", "哪个", "多少", "where", "what", "how", "why", "which", "meaning", "means", "能不能", "可以", "能不能", "帮我"]
+    const isQuestion = questionWords.some(w => ql.includes(w))
+    const isShort = q.length < 15
+    const hasQuestionMark = q.includes("？") || q.includes("?")
+    const mentionsCharging = ql.includes("充电") || ql.includes("站") || ql.includes("桩") || ql.includes("电")
+
+    if (isQuestion || hasQuestionMark) {
+      if (isShort) {
+        // 简短问题 — 先给答案再展开
+        reply = `这个问题问得挺好。\n\n让我直接回答你：\n\n` +
+          (mentionsCharging
+            ? `充电站运营中确实需要注意这一点。我觉得关键不在于这个问题的答案本身，而在于它背后反映的运营思路——是不是在以用户为中心做决策。\n\n如果你能多给我一点上下文，比如具体是哪个站点遇到了什么情况，我可以给出更落地的建议。`
+            : `坦白说，你这个问题背后可能有好几种不同的场景，我需要更多信息才能给出精准的答案。\n\n不过我可以先说说一般情况下的思路，你看看是否对得上你的场景。如果不对，再补充点细节，我帮你进一步分析。`)
+      } else {
+        reply = `好问题，让我认真思考一下。\n\n你问的是关于「${q.length > 40 ? q.slice(0, 40) + '...' : q}」的问题。\n\n我的理解是，这个问题的核心在于几个方面：\n\n1. **现状是什么** — 把事实和数据理清楚，避免凭感觉判断\n2. **为什么会出现** — 找到根本原因，而不是治标不治本\n3. **怎么解决** — 方案要有可操作性，不能只是概念\n4. **如何衡量效果** — 做完之后怎么知道有没有用\n\n其实很多复杂问题的解决思路都是类似的：先拆解、再分析、然后制定方案、最后验证。\n\n如果你不介意的话，可以告诉我更多背景信息——比如具体是什么场景下遇到的问题、已经尝试过哪些方法、期望达到什么效果。信息越具体，我能给出的建议就越精准。`
+      }
+    } else if (isShort) {
+      // 简短非提问 — 可能是关键词
+      reply = `嗯，我收到了你的消息。\n\n不过你说的比较简略，我理解起来可能有些偏差。你是想聊关于「${q}」这个话题吗？\n\n可以多说两句你想了解的具体方面，这样我能更准确地帮你。不用写很多，一句话描述清楚就行 😊`
+    } else {
+      // 长文本非提问 — 可能是描述场景
+      reply = `谢谢你分享这些信息，我仔细看了一遍。\n\n你描述的内容我大致理解了。这里面涉及几个层面的事情，我觉得可以这样来梳理：\n\n**先抓住核心矛盾**\n你提到的这些问题，如果抽丝剥茧去看，核心矛盾可能在于效率和体验的平衡——怎么在控制成本的同时，还能让用户有好的感受。\n\n**再找关键突破口**\n与其试图一次性解决所有问题，不如先找到一个"四两拨千斤"的点。通常来说，数据是最好的向导——看看哪个环节的用户流失率最高，或者哪个渠道的成本最低、转化率最高，从那里开始发力。\n\n**最后持续迭代**\n不要追求一次做到完美。先把最小可行方案跑起来，收集反馈，再调整。这比花很长时间做一个"完美的方案"要有效得多。\n\n如果你能告诉我更多具体的背景——比如当前的业务阶段、已有的资源、最头疼的一两个问题——我可以给出更有针对性的建议。`
+    }
+  }
+
+  // 模拟真实 AI 的思考延迟（300-800ms）
+  const delay = 300 + Math.random() * 500
+
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({
+        code: 200,
+        message: "操作成功",
+        data: {
+          reply,
+          timestamp: new Date().toISOString()
+        }
+      })
+    }, delay)
+  })
 })
