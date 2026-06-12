@@ -84,6 +84,11 @@ const menulist = [
       url: "/personal",
       icon: "User"
     },
+    {
+      name: "AI助手",
+      url: "/aichat",
+      icon: "Cpu"
+    },
 ]
 //运营专员的菜单
 const menulist2 = [
@@ -155,6 +160,11 @@ const menulist2 = [
       name: "个人中心",
       url: "/personal",
       icon: "User"
+    },
+    {
+      name: "AI助手",
+      url: "/aichat",
+      icon: "Cpu"
     },
 ]
 //登录接口
@@ -2585,5 +2595,43 @@ Mock.mock("https://www.demo.com/setAuth","post",(req:any)=>{
     code:200,
     message:"操作成功",
     data:null
+  }
+})
+
+// AI Chat 接口
+Mock.mock("https://www.demo.com/ai/chat","post",(options:any)=>{
+  const { prompt } = JSON.parse(options.body)
+  console.log("AI Chat 收到提问：", prompt)
+
+  // 根据关键词生成不同类型的回复
+  let reply = ""
+  const p = prompt.toLowerCase()
+
+  if (p.includes("数据") || p.includes("分析") || p.includes("统计")) {
+    reply = `好的，我来帮您分析数据！\n\n根据系统的运营数据，以下是我整理的关键分析结果：\n\n### 📊 数据看板总结\n\n| 指标 | 数值 | 趋势 |\n|------|------|------|\n| 总充电量 | 12,847 kWh | ↑ 8.5% |\n| 日均充电次数 | 356 次 | ↑ 5.2% |\n| 设备利用率 | 78.3% | → 持平 |\n| 故障率 | 2.1% | ↓ 0.8% |\n\n### 关键发现\n\n1. **高峰期集中在 10:00-14:00 和 17:00-20:00**，建议在这两个时段优化充电桩分配策略\n2. **快充桩使用率明显高于慢充桩**（89% vs 62%），可考虑适当调整设备比例\n3. **用户满意度评分 4.3/5**，投诉集中在充电速度慢和车位被占用问题上\n\n需要我进一步分析某个具体方面吗？比如营收趋势、设备健康状态或用户行为分析？`
+  } else if (p.includes("方案") || p.includes("推广") || p.includes("运营")) {
+    reply = `这是一个非常好的问题！针对充电站推广和运营优化，我为您制定了以下方案：\n\n### 🎯 充电站运营推广方案\n\n#### 一、用户引流策略\n\n1. **新用户首充优惠** — 首次充电享 8 折优惠，降低使用门槛\n2. **邀请有礼活动** — 老用户邀请新用户，双方各获充电券\n3. **地推合作** — 与商场、写字楼、小区物业合作推广\n\n#### 二、用户留存策略\n\n1. **会员积分体系** — 充电消费积分可兑换停车券、洗车服务\n2. **定时优惠** — 低谷时段充电享折扣，引导错峰充电\n3. **个性化推荐** — 根据用户充电习惯，推送最优充电方案\n\n#### 三、运营效率提升\n\n1. **智能调度系统** — 动态调整充电功率分配\n2. **预测性维护** — 基于设备数据提前预警故障\n3. **数据分析驱动** — 定期分析运营数据，优化策略\n\n需要我详细展开某个模块的具体实施方案吗？`
+  } else if (p.includes("代码") || p.includes("组件") || p.includes("vue") || p.includes("typescript") || p.includes("编程")) {
+    reply = `好的，我来为您编写一段 Vue 3 + TypeScript 代码！\n\n以下是一个功能完整的数据表格组件示例：\n\n<pre><code>&lt;template&gt;\n  &lt;el-table :data="tableData" v-loading="loading" border stripe&gt;\n    &lt;el-table-column\n      v-for="col in columns"\n      :key="col.prop"\n      :prop="col.prop"\n      :label="col.label"\n      :width="col.width"\n    /&gt;\n    &lt;el-table-column label="操作" width="180"&gt;\n      &lt;template #default="{ row }"&gt;\n        &lt;el-button link type="primary" @click="handleEdit(row)"&gt;编辑&lt;/el-button&gt;\n        &lt;el-button link type="danger" @click="handleDelete(row)"&gt;删除&lt;/el-button&gt;\n      &lt;/template&gt;\n    &lt;/el-table-column&gt;\n  &lt;/el-table&gt;\n&lt;/template&gt;</code></pre>\n\n这个组件支持动态列配置、排序、加载状态、编辑和删除操作等功能。\n\n需要我说明某个部分的实现逻辑吗？`
+  } else if (p.includes("趋势") || p.includes("行业") || p.includes("技术") || p.includes("发展")) {
+    reply = `关于充电站行业的发展趋势和关键技术，以下是详细分析：\n\n### 🚗 充电站行业发展趋势\n\n#### 1. 市场规模持续增长\n- 2025 年中国充电桩保有量突破 1200 万台\n- 车桩比从 3:1 向 2:1 优化\n- 市场规模预计 2030 年达到 5000 亿元\n\n#### 2. 技术演进方向\n\n| 技术领域 | 当前状态 | 发展趋势 |\n|----------|----------|----------|\n| 快充技术 | 120kW 为主流 | 向 350kW+ 超充发展 |\n| 无线充电 | 商用试点阶段 | 2028 年规模化应用 |\n| V2G 技术 | 示范项目 | 双向充电将成为标配 |\n| 智能调度 | AI 辅助 | 全自动智能调度 |\n\n#### 3. 商业模式创新\n\n- **光储充一体化** — 光伏+储能+充电，降低运营成本\n- **充电即服务（CaaS）** — 订阅制充电服务\n- **数据变现** — 充电视角下的用户行为数据价值\n\n如果您对某个方向特别感兴趣，我可以深入展开！`
+  } else if (p.includes("你好") || p.includes("hello") || p.includes("自我介绍")) {
+    reply = `你好！👋\n\n我是 **AI 智能助手**，基于大语言模型构建，可以帮你：\n\n- 💬 **回答问题** — 技术咨询、行业分析、知识科普\n- 📊 **数据分析** — 解读运营数据，生成分析报告\n- ✍️ **文案写作** — 方案策划、文档撰写\n- 💻 **代码编写** — 支持 Vue、TypeScript、Python 等多种语言\n- 🔍 **问题排查** — 帮助定位和解决技术问题\n\n请问有什么可以帮助你的？`
+  } else {
+    const genericReplies = [
+      `关于 **"${prompt}"** 这个问题，我的看法是：\n\n这是一个值得深入探讨的话题。从多个角度来看，我们可以得出以下结论：\n\n1. 首先，需要明确问题的核心诉求是什么\n2. 其次，结合实际情况分析可行的解决方案\n3. 最后，制定分阶段的执行计划\n\n如果您能提供更多具体信息，我可以给出更有针对性的建议！`,
+      `很好的问题！让我为您详细解答。\n\n针对您提到的内容，我整理了以下几点：\n\n- **现状分析**：目前行业整体处于快速发展阶段\n- **关键挑战**：技术迭代快、运营成本控制、用户体验提升\n- **建议方向**：数据驱动 + 智能化管理 + 精细化运营\n\n需要我进一步展开具体某个方面吗？`,
+      `感谢提问！\n\n您提到的这个问题涉及多个层面，以下是我的分析：\n\n### 核心观点\n\n技术是工具，业务是目的。在充电站管理系统的建设中，我们应当始终以业务需求为导向，选择合适的技术方案。\n\n### 实践建议\n\n1. 充分调研用户需求和痛点\n2. 制定清晰的技术路线图\n3. 小步快跑，持续迭代优化\n4. 重视数据反馈，及时调整策略\n\n如果您想了解更具体的实施细节，欢迎继续提问！`
+    ]
+    reply = genericReplies[Math.floor(Math.random() * genericReplies.length)]
+  }
+
+  return {
+    code: 200,
+    message: "操作成功",
+    data: {
+      reply,
+      timestamp: new Date().toISOString()
+    }
   }
 })

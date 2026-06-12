@@ -83,6 +83,11 @@ const routes: RouteRecordRaw[] = [
                 name: "personal",
                 component: () => import("@/views/personal/Personal.vue")
             },
+            {
+                path: "/aichat",
+                name: "aichat",
+                component: () => import("@/views/aichat/AiChat.vue")
+            },
         ]
     },
     {
