@@ -17,11 +17,9 @@
                 </el-form-item>
             </el-form>
             <div class="footer-badge">
-                <a href="https://claude.ai/code" target="_blank">
-                    <img :src="fable5Badge" alt="Fable5 Badge" class="badge-img" />
-                </a>
-                <p class="badge-text">本项目是经过 <span class="underline">Claude Code</span> <span
-                        class="underline">Fable5</span> 洗礼过的<span class="underline">臻藏版</span>项目</p>
+                <img :src="fable5Badge" alt="Fable5 Badge" class="badge-img" />
+                <p class="badge-text">本项目是经过 绝版模型 <span class="underline">Claude Code</span> <span
+                        class="underline">Fable5</span> 洗礼过的臻藏版项目</p>
             </div>
         </div>
     </div>
