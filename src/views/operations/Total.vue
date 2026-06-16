@@ -29,7 +29,7 @@ interface CityType {
 const treeData = ref<CityType[]>([]);
 const defaultProps = {
     children: 'children',
-    label: 'name',
+    label: 'label',
 };
 onMounted(async () => {
     try {
