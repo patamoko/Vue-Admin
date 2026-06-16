@@ -134,4 +134,3 @@ const ruleForm = ref<RuleFormType>({
     text-align: left;
 }
 </style>
-// test auto-push
