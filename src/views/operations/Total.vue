@@ -29,7 +29,7 @@
                         <el-form-item label="模版名称" prop="name">
                             <el-input v-model="ruleForm.name" placeholder="请输入计费模版名称" style="max-width: 200px;"/>
                         </el-form-item>
-                        <el-form-item label="时间区间">
+                        <el-form-item label="时间区间" >
                             <div style="display: flex; align-items: center; gap: 8px; width: 100%;">
                                 <el-time-picker placeholder="选择开始时间" style="flex: 1;"/>
                                 <span>--</span>
