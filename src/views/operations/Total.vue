@@ -22,8 +22,7 @@ import { ref, onMounted } from "vue";
 import { cityListApi } from "@/api/operation";
 const searchText = ref("");
 interface CityType {
-    id: number;
-    name: string;
+    label: string;
     children?: CityType[];
 }
 const treeData = ref<CityType[]>([]);
