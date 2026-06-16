@@ -273,7 +273,7 @@ async function sendMessage(text: string) {
     scrollToBottom()
 }
 
-// 调用 mock AI 接口
+// 调用 AI 接口
 async function fetchAiResponse(prompt: string): Promise<string> {
     try {
         const res = await post('https://www.demo.com/ai/chat', {
@@ -281,8 +281,9 @@ async function fetchAiResponse(prompt: string): Promise<string> {
             conversationId: currentConversationId.value
         })
         return res.data?.reply || '收到您的消息了。'
-    } catch {
-        // 如果 mock API 不可用，使用本地 fallback
+    } catch (err: any) {
+        // API 调用失败时弹出错误提示，并回退到本地回复
+        ElMessage.error(err?.message || 'AI 接口请求失败，已切换到离线模式')
         return generateLocalResponse(prompt)
     }
 }
