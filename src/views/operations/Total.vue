@@ -25,7 +25,7 @@
                             <h3>{{title}}计费模版</h3>
                         </div>
                     </template>
-                    <el-form :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="100px" label-position="left">
+                    <el-form :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="90px">
                         <el-form-item label="模版名称" prop="name">
                             <el-input v-model="ruleForm.name" placeholder="请输入计费模版名称" style="width: 60%;"/>
                         </el-form-item>
