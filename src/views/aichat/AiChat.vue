@@ -266,6 +266,7 @@ async function sendMessage(text: string) {
     } catch {
         aiMsg.typing = false
         aiMsg.content = '抱歉，回复生成失败，请稍后重试。'
+        ElMessage.error('AI 回复失败，请稍后重试')
     }
 
     loading.value = false
