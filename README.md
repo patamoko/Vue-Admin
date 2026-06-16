@@ -9,6 +9,7 @@
 [![Pinia](https://img.shields.io/badge/Pinia-2.2-ffd859?logo=vue.js)](https://pinia.vuejs.org/)
 [![ECharts](https://img.shields.io/badge/ECharts-5.6-aa344d)](https://echarts.apache.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
+[![Featured](https://img.shields.io/badge/Featured-🔥%20Trending-orange?style=flat)](https://github.com/yetone/alma-releases/issues/56)
 
 ---
 

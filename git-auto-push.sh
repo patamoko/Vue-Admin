@@ -1,63 +1,72 @@
 #!/bin/bash
-# 后台自动提交+推送 — launchd 守护进程
-# 无需终端，开机自启，每 2 秒检测变更
+# 全局后台自动提交+推送 — 监控所有 Git 仓库
+# launchd 守护进程，无需终端，开机自启
 
-PROJECT_DIR="/Users/alex/Documents/code/Vue+Ts"
 LOG_FILE="/Users/alex/.local/log/git-auto-push.log"
-LOCK_FILE="/tmp/git-auto-push-vuets.lock"
+CACHE="/Users/alex/.local/log/repo-cache.txt"
 
-cd "$PROJECT_DIR" || exit 1
+log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"; }
 
-log() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"
+refresh() {
+    > "$CACHE"
+
+    # cd 进 Documents 再扫描，绕过 launchd 对根目录的列目录限制
+    cd /Users/alex/Documents 2>/dev/null || return
+    for d in */; do
+        # 深度2: Documents/xxx/.git
+        [ -d "$d.git" ] && echo "/Users/alex/Documents/${d%/}" >> "$CACHE"
+        # 深度3: Documents/xxx/yyy/.git
+        for dd in "$d"*/; do
+            [ -d "${dd}.git" ] && echo "/Users/alex/Documents/${dd%/}" >> "$CACHE"
+        done
+    done
+    cd / 2>/dev/null
 }
 
-# 防重入
-if [ -f "$LOCK_FILE" ]; then
-    pid=$(cat "$LOCK_FILE" 2>/dev/null)
-    if kill -0 "$pid" 2>/dev/null; then
-        exit 0
+check_one() {
+    repo="$1"
+    [ -d "$repo/.git" ] || return
+    branch=$(cat "$repo/.git/HEAD" 2>/dev/null | awk -F/ '{print $NF}')
+    [ -z "$branch" ] && return
+
+    if git -C "$repo" diff --quiet 2>/dev/null && \
+       git -C "$repo" diff --cached --quiet 2>/dev/null && \
+       ! git -C "$repo" ls-files --others --exclude-standard 2>/dev/null | grep -q .; then
+        return
     fi
-fi
-echo $$ > "$LOCK_FILE"
-trap "rm -f $LOCK_FILE" EXIT
 
-if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-    log "ERROR: not a git repo"
-    exit 1
-fi
+    log "[$(basename "$repo")] changed"
+    git -C "$repo" add -A 2>/dev/null
+    git -C "$repo" commit -m "auto: $(date '+%Y-%m-%d %H:%M')" --no-gpg-sign 2>/dev/null
 
-if ! git remote -v 2>/dev/null | grep -q "origin"; then
-    log "ERROR: no remote origin"
-    exit 1
-fi
+    for i in 1 2; do
+        if git -C "$repo" push origin "$branch" 2>>"$LOG_FILE"; then
+            log "[$(basename "$repo")] pushed ($branch)"
+            return
+        fi
+        sleep 5
+    done
+}
 
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
-log "STARTED | branch=$BRANCH"
+log "GLOBAL STARTED"
+refresh
+COUNT=$(wc -l < "$CACHE" 2>/dev/null | tr -d ' ')
+log "found $COUNT repos"
 
-LAST_STATE=$(git status --porcelain 2>/dev/null | md5)
+LAST=0
 
 while true; do
-    CURRENT_STATE=$(git status --porcelain 2>/dev/null | md5)
-
-    if [ "$CURRENT_STATE" != "$LAST_STATE" ]; then
-        if git status --porcelain | grep -q "."; then
-            log "changes detected, committing..."
-            git add -A
-            git commit -m "auto: $(date '+%Y-%m-%d %H:%M')" --no-gpg-sign
-
-            for i in 1 2; do
-                if git push origin "$BRANCH" 2>>"$LOG_FILE"; then
-                    log "push OK"
-                    break
-                else
-                    log "push retry $i failed"
-                    sleep 5
-                fi
-            done
-        fi
-        LAST_STATE=$CURRENT_STATE
+    NOW=$(date +%s)
+    if [ $((NOW - LAST)) -ge 300 ]; then
+        refresh
+        COUNT=$(wc -l < "$CACHE" 2>/dev/null | tr -d ' ')
+        log "refresh: $COUNT repos"
+        LAST=$NOW
     fi
+
+    while IFS= read -r repo; do
+        [ -n "$repo" ] && check_one "$repo"
+    done < "$CACHE"
 
     sleep 2
 done
