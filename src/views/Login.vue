@@ -18,7 +18,8 @@
             </el-form>
             <div class="footer-badge">
                 <img :src="fable5Badge" alt="Fable5 Badge" class="badge-img" />
-                <p class="badge-text">Claude Code Fable5</p>
+                <p class="badge-text">本项目是经过 <span class="underline">Claude Code</span> <span
+                        class="underline">Fable5</span> 洗礼过的<span class="underline">臻藏版</span>项目</p>
             </div>
         </div>
     </div>
@@ -100,11 +101,14 @@ const handleLogin = () => {
     }
 
     .badge-text {
-        margin-top: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        color: #333;
-        text-decoration: underline;
+        margin-top: 12px;
+        font-size: 14px;
+        color: #888;
+
+        .underline {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
     }
 }
 </style>
