@@ -25,35 +25,35 @@
                             <h3>{{title}}计费模版</h3>
                         </div>
                     </template>
-                    <el-form :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="120px">
+                    <el-form :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="100px" label-position="left">
                         <el-form-item label="模版名称" prop="name">
-                            <el-input v-model="ruleForm.name" placeholder="请输入计费模版名称" style="max-width: 200px;"/>
+                            <el-input v-model="ruleForm.name" placeholder="请输入计费模版名称" style="width: 60%;"/>
                         </el-form-item>
                         <el-form-item label="时间区间">
                             <el-row :gutter="12" style="width: 100%;">
-                                <el-col :span="9">
+                                <el-col :span="8">
                                     <el-time-picker placeholder="选择开始时间" style="width: 100%;"/>
                                 </el-col>
                                 <el-col :span="2" style="text-align: center; line-height: 32px;">--</el-col>
-                                <el-col :span="9">
+                                <el-col :span="8">
                                     <el-time-picker placeholder="选择结束时间" style="width: 100%;"/>
                                 </el-col>
                             </el-row>
                         </el-form-item>
                         <el-form-item label="电费">
-                            <el-input placeholder="请输入电费" style="max-width: 220px;"/>
+                            <el-input placeholder="请输入电费" style="width: 60%;"/>
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" class="mb">添加时间区间</el-button>
                         </el-form-item>
                         <el-form-item label="服务费" prop="service">
-                            <el-input v-model="ruleForm.service" placeholder="请输入服务费" style="max-width: 220px;"/>
+                            <el-input v-model="ruleForm.service" placeholder="请输入服务费" style="width: 60%;"/>
                         </el-form-item>
                         <el-form-item label="停车费" prop="perking">
-                            <el-input v-model="ruleForm.perking" placeholder="请输入停车费" style="max-width: 220px;"/>
+                            <el-input v-model="ruleForm.perking" placeholder="请输入停车费" style="width: 60%;"/>
                         </el-form-item>
                         <el-form-item label="备注" prop="remarks">
-                            <el-input v-model="ruleForm.remarks" placeholder="请输入备注" type="textarea" style="max-width: 400px;"/>
+                            <el-input v-model="ruleForm.remarks" placeholder="请输入备注" type="textarea" style="width: 80%;"/>
                         </el-form-item>
                     </el-form>
                 </el-card>
