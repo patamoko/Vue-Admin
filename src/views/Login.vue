@@ -16,11 +16,16 @@
                     <el-button type="primary" style="width: 100%" @click="handleLogin">登录</el-button>
                 </el-form-item>
             </el-form>
+            <div class="footer-badge">
+                <img :src="fable5Badge" alt="Fable5 Badge" class="badge-img" />
+                <p class="badge-text">Claude Code Fable5</p>
+            </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import logo from "../assets/logo.png";
+import fable5Badge from "../assets/fable5-badge.png";
 import { reactive, ref } from "vue";
 import type { FormRules, FormInstance } from "element-plus";
 import { useUserStore } from "@/store/auth";
@@ -82,6 +87,24 @@ const handleLogin = () => {
                 color: rgb(14, 53, 148);
             }
         }
+    }
+}
+
+.footer-badge {
+    margin-top: 30px;
+    text-align: center;
+
+    .badge-img {
+        max-width: 200px;
+        height: auto;
+    }
+
+    .badge-text {
+        margin-top: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        text-decoration: underline;
     }
 }
 </style>

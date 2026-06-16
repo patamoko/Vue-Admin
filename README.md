@@ -1,5 +1,9 @@
 # 动力港 · 充电站运营管理平台
-
+<p align="center">
+  <img src="./src/assets/fable5-badge.png" alt="Fable5 Badge" width="200" />
+  <br/>
+  <strong>Claude Code Fable5</strong>
+</p>
 > 企业级新能源充电基础设施运营管理系统 — 覆盖充电站监控、营收分析、故障管理、订单运营、AI 智能助手等全链路业务场景
 
 [![Vue](https://img.shields.io/badge/Vue-3.5-4fc08d?logo=vue.js&logoColor=white)](https://vuejs.org/)
@@ -9,7 +13,7 @@
 [![Pinia](https://img.shields.io/badge/Pinia-2.2-ffd859?logo=vue.js)](https://pinia.vuejs.org/)
 [![ECharts](https://img.shields.io/badge/ECharts-5.6-aa344d)](https://echarts.apache.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
-[![Featured](https://img.shields.io/badge/Featured-🔥%20Trending-orange?style=flat)](https://github.com/yetone/alma-releases/issues/56)
+
 
 ---
 
