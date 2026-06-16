@@ -17,6 +17,14 @@
 [![ECharts](https://img.shields.io/badge/ECharts-5.6-aa344d)](https://echarts.apache.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
 
+<p align="center">
+  <a href="https://claude.ai/code" target="_blank">
+    <img src="./src/assets/fable5-badge.png" alt="Fable5 Badge" width="200" />
+  </a>
+  <br/>
+  <span style="color: #888; font-size: 14px;">本项目是经过 <u>Claude Code</u> <u>Fable5</u> 洗礼过的<u>臻藏版</u>项目</span>
+</p>
+
 
 ---
 
